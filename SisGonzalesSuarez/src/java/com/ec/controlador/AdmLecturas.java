@@ -6,6 +6,7 @@ package com.ec.controlador;
 
 import com.ec.entidad.Factura;
 import com.ec.entidad.Lectura;
+import com.ec.servicio.ServicioGeneral;
 import com.ec.servicio.ServicioLectura;
 import com.ec.untilitario.ArchivoUtils;
 import com.ec.untilitario.ListadoMeses;
@@ -35,6 +36,7 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Filedownload;
+import org.zkoss.zul.Messagebox;
 
 /**
  *
@@ -49,6 +51,8 @@ public class AdmLecturas {
     private String buscar = "";
     private ModeloMeses buscarMes = new ModeloMeses();
     private List<ModeloMeses> meses = new ArrayList<ModeloMeses>();
+    private Date fechaCreacion = new Date();
+    ServicioGeneral servicioGeneral = new ServicioGeneral();
 
     public AdmLecturas() {
         meses = ListadoMeses.getListaMeses();
@@ -67,6 +71,17 @@ public class AdmLecturas {
     @NotifyChange({"listaDatos", "buscarMes"})
     public void buscarLecturas() {
         findMesAndNuMedidor();
+    }
+
+    @Command
+    @NotifyChange({"listaDatos", "buscarMes"})
+    public void generarLecturasMedidores() {
+        if (Messagebox.show("Desea generar las lecturas de los medidores resagados en el mes de" + buscarMes.getNombre() + " Desea continuar?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
+            fechaCreacion.setMonth(buscarMes.getNumero() - 1);
+            System.out.println("fechaCreacion " + fechaCreacion);
+            servicioGeneral.iniciarLecturaMedidor(buscarMes.getNumero(), fechaCreacion);
+            findMesAndNuMedidor();
+        } 
     }
 
     @Command
@@ -232,7 +247,6 @@ public class AdmLecturas {
             HSSFCell ch22 = r.createCell(j++);
             ch22.setCellValue(new HSSFRichTextString("Metros cubicos"));
             ch22.setCellStyle(estiloCelda);
-
 
             int rownum = 1;
             int i = 0;

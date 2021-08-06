@@ -126,7 +126,7 @@ public class NuevoMedidor {
                 System.out.println("FECHA: "+entidad.getMedFechaRegistro());
                 servicioMedidor.crear(entidad);
                
-                 servicioGeneral.iniciarLecturaMedidor(entidad.getMedFechaRegistro().getMonth(),entidad.getMedFechaRegistro());
+                 servicioGeneral.iniciarLecturaMedidor(entidad.getMedFechaRegistro().getMonth()+1,entidad.getMedFechaRegistro());
             } else {
                  System.out.println("MES dddd: "+entidad.getMedFechaRegistro().getMonth());
                 System.out.println("FECHA  ddd: "+entidad.getMedFechaRegistro());

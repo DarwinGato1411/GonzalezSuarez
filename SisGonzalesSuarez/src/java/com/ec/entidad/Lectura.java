@@ -219,4 +219,8 @@ public class Lectura implements Serializable {
         mesActual = mesActual;
     }
 
+    public String setLecPagada() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

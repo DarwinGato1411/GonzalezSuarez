@@ -89,18 +89,20 @@
         </auxhead>  
         <listhead>   
                     
-            
-            <listheader width="5%"  label="# Medidor" />
-            <listheader width="25%"  label="Nombres" >              
+          <listheader width="5%"  label="# Medidor" />
+            <listheader width="20%"  label="Nombres" >              
             </listheader> 
-            <listheader width="25%"  label="Apellidos" >              
+            <listheader width="20%"  label="Apellidos" >              
+            </listheader> 
+            <listheader width="10%"  label="Estado" >              
             </listheader> 
             <listheader width="10%"  label="Lectura anterior" />
                        
             <listheader width="10%"  label="Lectura actual" />              
             <listheader width="10%"  label="Metros cubicos" />  
             <listheader width="10%"  label="Fecha lectura" />               
-            <listheader width="5%"  label="" align="center"/>              
+            <listheader width="3%"  label="" align="center"/>              
+            <listheader width="3%"  label="" align="center"/>              
           
         </listhead>  
         <template name="model">                                                            
@@ -120,6 +122,18 @@
                              class="form-control form-control-sm"  
                              value="@bind(each.idMedidor.idPredio.idPropietario.propApellido)"  />
                 </listcell>              
+                 <zk  choose="@bind(each.lecPagada)" >
+                    <zk  when="${each.lecPagada == 'S'}"  >
+                        <listcell    zclass = "mycss-listcell"  style="background:#C7FEC1" >
+                            <label  value="PAGADA" width="96%"/>
+                        </listcell>
+                    </zk>
+                    <zk  when="${each.lecPagada == 'N'}"  >
+                        <listcell    zclass = "mycss-listcell"  style="background:#FFCFCD" >
+                            <label value="PENDIENTE"  width="96%"/>
+                        </listcell>
+                    </zk>
+                </zk>   
                 <listcell zclass = "mycss-listcell">
                     <textbox style="font-size:12px;background:white"
                              class="form-control form-control-sm"  
@@ -151,6 +165,12 @@
                            class="grow"
                            onClick="@command('actualizar',valor=each)" 
                            tooltiptext="Modificar producto"/> 
+                </listcell>
+                <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">    
+                    <image src="/iconos/pagar.png"
+                           class="grow"
+                           onClick="@command('cambiarestado',valor=each)" 
+                           tooltiptext="Cambiar Estado"/> 
                 </listcell>
             </listitem>
         </template>

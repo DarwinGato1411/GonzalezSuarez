@@ -37,7 +37,7 @@
                             <div class="row  col-12 col-sm-12 col-md-12 col-lg-12">
                             
                  
-                                <div class="col-12 col-sm-12 col-md-5 col-lg-5 " >
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 " >
                               
                                     <listbox  width="100%" model="@load(vm.listMedidores)" 
                                               height="180px"
@@ -59,6 +59,7 @@
                                                                onChange="self.setValue(self.getValue().toUpperCase());"  />
                                             </listheader>
                                             <listheader width="45%" label="Apellido"  ></listheader>
+                                            <listheader width="30%" label="C.I"  ></listheader>
                                             <listheader width="30%" label="Ubicacion"  ></listheader>
                                             <listheader width="30%"   >
                                                  <textbox zclass = "mycss-listcell" 
@@ -87,6 +88,12 @@
                                                              class="form-control form-control-sm"  
                                                              readonly="true"
                                                              value="@bind(each.idPredio.idPropietario.propApellido)"  />
+                                                </listcell>
+                                                <listcell zclass = "mycss-listcell">
+                                                    <textbox style="font-size:12px;background:white"
+                                                             class="form-control form-control-sm"  
+                                                             readonly="true"
+                                                             value="@bind(each.idPredio.idPropietario.porpCedula)"  />
                                                 </listcell>
                                                  <listcell zclass = "mycss-listcell">
                                                     <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
@@ -251,7 +258,7 @@
                                     </listbox>
                                 </div>
                                 <!--hidden-sm-down-->
-                                <div class="col-12 col-sm-12 col-md-7 col-lg-7 " >
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 " >
                                     
                                  
                                     <div class=" row col-12 col-sm-12 col-md-12 col-lg-12 hidden-sm-down"   >

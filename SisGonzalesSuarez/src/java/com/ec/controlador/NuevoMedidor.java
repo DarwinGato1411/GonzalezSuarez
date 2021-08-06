@@ -7,6 +7,7 @@ package com.ec.controlador;
 import com.ec.entidad.Medidor;
 import com.ec.entidad.Predio;
 import com.ec.entidad.Tarifa;
+import com.ec.servicio.ServicioGeneral;
 import com.ec.servicio.ServicioMedidor;
 import com.ec.servicio.ServicioPredio;
 import com.ec.servicio.ServicioTarifa;
@@ -49,6 +50,7 @@ public class NuevoMedidor {
     private List<Tarifa> listatarifas = new ArrayList<Tarifa>();
     private Tarifa tarifaSelected = null;
 
+    ServicioGeneral servicioGeneral= new ServicioGeneral();
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") Medidor valor, @ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
@@ -64,6 +66,7 @@ public class NuevoMedidor {
         } else {
             this.entidad = new Medidor();
             entidad.setMedFechaRegistro(new Date());
+            entidad.setMedFechaInstala(new Date());
             entidad.setMedNumero("");
             accion = "create";
             Medidor ultimoMedidor = servicioMedidor.findUltimoMedidorRegistrado();
@@ -118,9 +121,15 @@ public class NuevoMedidor {
                 && entidad.getIdPredio() != null
                 && !entidad.getMedNumero().equals("")) {
 
-            if (accion.equals("ceate")) {
+            if (accion.equals("create")) {
+                 System.out.println("MES: "+entidad.getMedFechaRegistro().getMonth());
+                System.out.println("FECHA: "+entidad.getMedFechaRegistro());
                 servicioMedidor.crear(entidad);
+               
+                 servicioGeneral.iniciarLecturaMedidor(entidad.getMedFechaRegistro().getMonth(),entidad.getMedFechaRegistro());
             } else {
+                 System.out.println("MES dddd: "+entidad.getMedFechaRegistro().getMonth());
+                System.out.println("FECHA  ddd: "+entidad.getMedFechaRegistro());
                 servicioMedidor.modificar(entidad);
             }
             wMedidor.detach();

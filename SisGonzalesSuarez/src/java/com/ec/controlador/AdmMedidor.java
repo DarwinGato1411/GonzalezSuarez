@@ -5,9 +5,7 @@
 package com.ec.controlador;
 
 import com.ec.entidad.Medidor;
-import com.ec.entidad.Tarifa;
 import com.ec.servicio.ServicioMedidor;
-import com.ec.servicio.ServicioTarifa;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

@@ -87,10 +87,16 @@ public class AdmLecturas {
     @Command
     @NotifyChange({"listaDatos", "buscarMes"})
     public void iniciarMesSiguiente() {
-        servicioLectura.iniciarProximoMes(buscarMes.getNumero());
-        findMesAndNuMedidor();
-    }
 
+        if (org.zkoss.zhtml.Messagebox.show("Al generar una nueva tabla de lecturas, los lecturas de " + buscarMes.getNombre() + " serán eliminadas" + "\n Desea continuar?", "Question", org.zkoss.zhtml.Messagebox.OK | org.zkoss.zhtml.Messagebox.CANCEL, org.zkoss.zhtml.Messagebox.QUESTION) == org.zkoss.zhtml.Messagebox.OK) {
+            servicioLectura.iniciarProximoMes(buscarMes.getNumero());
+            findMesAndNuMedidor();
+        } else {
+            Clients.showNotification("Solicitud cancelada",
+                    Clients.NOTIFICATION_TYPE_INFO, null, "middle_center", 1000, true);
+        }
+    }
+    
     @Command
     @NotifyChange({"listaDatos", "buscar"})
     public void nuevo() {

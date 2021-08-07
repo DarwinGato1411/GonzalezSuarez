@@ -7,7 +7,6 @@ package com.ec.controlador;
 import com.ec.entidad.Cliente;
 import com.ec.entidad.DetalleFactura;
 import com.ec.entidad.Factura;
-import com.ec.entidad.FacturasActorizadaSri;
 import com.ec.entidad.Tipoambiente;
 import com.ec.servicio.HelperPersistencia;
 import com.ec.servicio.ServicioCliente;

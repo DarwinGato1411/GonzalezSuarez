@@ -3328,6 +3328,21 @@ public class Facturar extends SelectorComposer<Component> {
             Messagebox.show("Verifique el cliente", "Atención", Messagebox.OK, Messagebox.INFORMATION);
         }
     }
+    
+     @Command
+    public void verHistoricoFac(@BindingParam("valor") Medidor valor) {
+
+        
+        try {
+            final HashMap<String, Medidor> map = new HashMap<String, Medidor>();
+            map.put("valor", valor);
+            org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+                    "/reportevistas/verhistorico.zul", null, map);
+            window.doModal();
+        } catch (Exception e) {
+            Messagebox.show("Error " + e.toString(), "Atención", Messagebox.OK, Messagebox.INFORMATION);
+        }
+    }
 
     public static String getTIPOPRECIO() {
         return TIPOPRECIO;
@@ -3438,5 +3453,5 @@ public class Facturar extends SelectorComposer<Component> {
     public void setBuscarMedidorNumero(String buscarMedidorNumero) {
         this.buscarMedidorNumero = buscarMedidorNumero;
     }
-
+    
 }

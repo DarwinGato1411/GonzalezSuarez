@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/DECKXEL/PROYECTOS/Git%20Gonzales/GonzalezSuarez/SisGonzalesSuarez/web/venta/listafacturas.zul</file>
+            <file>file:/D:/DECKXEL/PROYECTOS/Git%20Gonzales/GonzalezSuarez/SisGonzalesSuarez/src/java/com/ec/controlador/Historico.java</file>
+            <file>file:/D:/DECKXEL/PROYECTOS/Git%20Gonzales/GonzalezSuarez/SisGonzalesSuarez/web/venta/facturar.zul</file>
+            <file>file:/D:/DECKXEL/PROYECTOS/Git%20Gonzales/GonzalezSuarez/SisGonzalesSuarez/web/reportevistas/verhistorico.zul</file>
+            <file>file:/D:/DECKXEL/PROYECTOS/Git%20Gonzales/GonzalezSuarez/SisGonzalesSuarez/src/java/com/ec/controlador/Facturar.java</file>
+            <file>file:/D:/DECKXEL/PROYECTOS/Git%20Gonzales/GonzalezSuarez/SisGonzalesSuarez/src/java/com/ec/entidad/Propietario.java</file>
+        </group>
     </open-files>
 </project-private>

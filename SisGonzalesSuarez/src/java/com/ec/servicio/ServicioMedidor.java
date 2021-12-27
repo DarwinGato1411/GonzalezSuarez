@@ -198,6 +198,29 @@ public class ServicioMedidor {
         return listaMedidors;
     }
 
+    
+     public List<Medidor> findLikeMedNumeroCedula(String valor) {
+
+        List<Medidor> listaMedidors = new ArrayList<Medidor>();
+        try {
+            //Connection connection = em.unwrap(Connection.class);
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT  a FROM Medidor a WHERE a.idPredio.idPropietario.porpCedula LIKE :porpCedula ORDER BY a.medNumero ASC");
+            query.setParameter("porpCedula", "%" + valor + "%");
+//            query.setParameter("propNombre", "%" + valor + "%");
+//            query.setParameter("propApellido", "%" + valor + "%");
+            //query.setMaxResults(200);
+            listaMedidors = (List<Medidor>) query.getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta medidor findLikeMedNumero " + e.getMessage());
+        } finally {
+            em.close();
+        }
+
+        return listaMedidors;
+    }
     public Medidor findMedNumero(String valor) {
 
         List<Medidor> listaMedidors = new ArrayList<Medidor>();

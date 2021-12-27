@@ -158,6 +158,7 @@ public class Facturar extends SelectorComposer<Component> {
     private String buscarNombre = "";
     private String buscarRazonSocial = "";
     private String buscarCedula = "";
+       private String buscarCedulaMed = "";
     public static String buscarCliente = "";
     //busacar producto
     ServicioProducto servicioProducto = new ServicioProducto();
@@ -549,6 +550,13 @@ public class Facturar extends SelectorComposer<Component> {
     public void buscarMedidores() {
 
         listMedidores = servicioMedidor.findLikeMedidorPropietario(buscarMedidor);
+    }
+    
+     @Command
+    @NotifyChange({"listMedidores", "buscarCedulaMed"})
+    public void buscarMedidorCedula() {
+
+        listMedidores = servicioMedidor.findLikeMedNumeroCedula(buscarCedulaMed);
     }
 
     @Command
@@ -3452,6 +3460,14 @@ public class Facturar extends SelectorComposer<Component> {
 
     public void setBuscarMedidorNumero(String buscarMedidorNumero) {
         this.buscarMedidorNumero = buscarMedidorNumero;
+    }
+
+    public String getBuscarCedulaMed() {
+        return buscarCedulaMed;
+    }
+
+    public void setBuscarCedulaMed(String buscarCedulaMed) {
+        this.buscarCedulaMed = buscarCedulaMed;
     }
     
 }

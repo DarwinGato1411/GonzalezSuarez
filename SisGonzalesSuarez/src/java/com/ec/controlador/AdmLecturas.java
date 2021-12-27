@@ -102,7 +102,7 @@ public class AdmLecturas {
     public void cambiarestado(@BindingParam("valor") Lectura valor) {
         
         if (Messagebox.show("Desea cambiar el Estado", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
-            if (valor.getLecPagada() == "S") {
+            if ("S".equals(valor.getLecPagada())) {
                 valor.setLecPagada("N");
                 servicioLectura.modificar(valor);
             } else {

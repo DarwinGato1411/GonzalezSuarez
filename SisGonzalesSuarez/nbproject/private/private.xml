@@ -3,12 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/DECKXEL/PROYECTOS/Git%20Gonzales/GonzalezSuarez/SisGonzalesSuarez/web/venta/listafacturas.zul</file>
-            <file>file:/D:/DECKXEL/PROYECTOS/Git%20Gonzales/GonzalezSuarez/SisGonzalesSuarez/src/java/com/ec/controlador/Historico.java</file>
-            <file>file:/D:/DECKXEL/PROYECTOS/Git%20Gonzales/GonzalezSuarez/SisGonzalesSuarez/web/venta/facturar.zul</file>
-            <file>file:/D:/DECKXEL/PROYECTOS/Git%20Gonzales/GonzalezSuarez/SisGonzalesSuarez/web/reportevistas/verhistorico.zul</file>
-            <file>file:/D:/DECKXEL/PROYECTOS/Git%20Gonzales/GonzalezSuarez/SisGonzalesSuarez/src/java/com/ec/controlador/Facturar.java</file>
-            <file>file:/D:/DECKXEL/PROYECTOS/Git%20Gonzales/GonzalezSuarez/SisGonzalesSuarez/src/java/com/ec/entidad/Propietario.java</file>
+            <file>file:/E:/DARWIN/JUNTAGONZALEZ/GonzalezSuarez/SisGonzalesSuarez/web/venta/facturar.zul</file>
+            <file>file:/E:/DARWIN/JUNTAGONZALEZ/GonzalezSuarez/SisGonzalesSuarez/src/java/com/ec/controlador/Facturar.java</file>
+            <file>file:/E:/DARWIN/JUNTAGONZALEZ/GonzalezSuarez/SisGonzalesSuarez/web/venta/admlecturas.zul</file>
+            <file>file:/E:/DARWIN/JUNTAGONZALEZ/GonzalezSuarez/SisGonzalesSuarez/src/java/com/ec/servicio/ServicioFactura.java</file>
+            <file>file:/E:/DARWIN/JUNTAGONZALEZ/GonzalezSuarez/SisGonzalesSuarez/src/java/com/ec/controlador/AdmLecturas.java</file>
+            <file>file:/E:/DARWIN/JUNTAGONZALEZ/GonzalezSuarez/SisGonzalesSuarez/src/java/com/ec/servicio/ServicioMedidor.java</file>
         </group>
     </open-files>
 </project-private>

@@ -8,6 +8,7 @@ import com.ec.dao.DetalleFacturaDAO;
 import com.ec.entidad.Cliente;
 import com.ec.entidad.DetalleFactura;
 import com.ec.entidad.Factura;
+import com.ec.entidad.Lectura;
 import com.ec.untilitario.Totales;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -106,7 +107,11 @@ public class ServicioFactura {
                 detalleFactura.setDetLecMes(item.getLectura() != null ? item.getLectura().getLecMes() : 0);
                 detalleFactura.setDetMedidor(item.getLectura() != null ? item.getLectura().getIdMedidor().getMedNumero() : "");
                 detalleFactura.setDetDirMedidor(item.getLectura() != null ? item.getLectura().getIdMedidor().getMedBarrio(): "");
+                detalleFactura.setIdLectura(item.getLectura());
                 // servicioDetalleFactura.crear(detalleFactura);
+                Lectura actual=item.getLectura();
+                actual.setLecPagada("S");
+                em.merge(actual);
                 em.persist(detalleFactura);
                 em.flush();
             }

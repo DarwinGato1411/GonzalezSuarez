@@ -8,8 +8,8 @@
     <div  class="container-fluid " >
                   
         <listbox  width="100%" model="@load(vm.listaDatosHistorial)" 
-                      height="180px"
-                      mold="paging" pageSize="4"
+                      height="300px"
+                      mold="paging" pageSize="10"
                       checkmark="false"  
                       multiple="false"              
                       nonselectableTags=""
@@ -17,47 +17,23 @@
             <custom-attributes org.zkoss.zul.listbox.rod="true"/>
                                        
             <listhead>  
-                <listheader width="10%"  label="# Medidor" ></listheader>                   
-                <listheader width="20%"  label="Nombres" ></listheader>
-                <listheader width="20%" label="Apellido"  ></listheader>
-                <listheader width="20%" label="C.I"  ></listheader>
-                <listheader width="15%" label="Estado"  ></listheader>            
-                <listheader width="15%" label="Verificar facturas"></listheader>              
-                <listheader width="15%" label="Mes"></listheader>              
+                <listheader width="15%"  label="# Medidor" ></listheader>                   
+                <listheader width="65%"  label="Detalle" ></listheader>             
+                <listheader width="20%" label="Mes"></listheader>              
             </listhead>  
             <template name="model">                                                            
                 <listitem>  
                     <listcell zclass = "mycss-listcell">
                         <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
                                      class="form-control form-control-sm"  
-                                     value="@bind(each.cliCedula)"  />
+                                     value="@bind(each.detMedidor)"  />
                     </listcell>
                     <listcell zclass = "mycss-listcell">
                         <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
                                      class="form-control form-control-sm"  
-                                     value="@bind(each.detDescriocion)"  />
+                                     value="@bind(each.detDescripcion)"  />
                     </listcell>
-                    <listcell zclass = "mycss-listcell">
-                        <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
-                                     class="form-control form-control-sm"  
-                                     value="@bind(each.facLecAnterior)"  />
-                    </listcell> 
-                    <listcell zclass = "mycss-listcell">
-                        <textbox style="font-size:12px;background:white"
-                                     class="form-control form-control-sm"  
-                                     readonly="true" 
-                                     value="@bind(each.facLecActual)"                           />
-                    </listcell>
-                    <listcell zclass = "mycss-listcell">
-                        <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
-                                     class="form-control form-control-sm"  
-                                     value="@bind(each.facMetrosCubicos)"                             />
-                    </listcell>
-                    <listcell zclass = "mycss-listcell">
-                        <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
-                                     class="form-control form-control-sm"   
-                                     value="@bind(each.facMedidor)"                             />
-                    </listcell>
+                 
                     <listcell zclass = "mycss-listcell">
                         <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
                                      class="form-control form-control-sm"   

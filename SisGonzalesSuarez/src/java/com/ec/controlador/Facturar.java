@@ -158,7 +158,7 @@ public class Facturar extends SelectorComposer<Component> {
     private String buscarNombre = "";
     private String buscarRazonSocial = "";
     private String buscarCedula = "";
-       private String buscarCedulaMed = "";
+    private String buscarCedulaMed = "";
     public static String buscarCliente = "";
     //busacar producto
     ServicioProducto servicioProducto = new ServicioProducto();
@@ -277,6 +277,8 @@ public class Facturar extends SelectorComposer<Component> {
     private List<Lectura> listaDatosLectura = new ArrayList<Lectura>();
 
     ServicioDetalleTarifas servicioDetalleTarifas = new ServicioDetalleTarifas();
+    /*multa cobrada*/
+    private Boolean multaCobrada = Boolean.FALSE;
 
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") ParamFactura valor, @ContextParam(ContextType.VIEW) Component view) {
@@ -551,8 +553,8 @@ public class Facturar extends SelectorComposer<Component> {
 
         listMedidores = servicioMedidor.findLikeMedidorPropietario(buscarMedidor);
     }
-    
-     @Command
+
+    @Command
     @NotifyChange({"listMedidores", "buscarCedulaMed"})
     public void buscarMedidorCedula() {
 
@@ -812,6 +814,7 @@ public class Facturar extends SelectorComposer<Component> {
             cobroTotal = valorCobroBase.add(valorCobroExce).add(alcantarillado).add(desechos).add(ambiente);
             valor.setTotalInicial(cobroTotal);
             valor.setTotal(cobroTotal);
+
             //para llenar lectura como producto
             if (valor.getCantidad() == null) {
                 return;
@@ -875,6 +878,7 @@ public class Facturar extends SelectorComposer<Component> {
 
                 valor.setDetCantpordescuento(valorDescuento.multiply(valor.getCantidad()));
                 /*GREGA LECTURA AL REGISTRO*/
+ /*colocamos la lectura solo en el registro de cobro por concepto de agua*/
                 valor.setLectura(lectura);
 
             }
@@ -887,20 +891,24 @@ public class Facturar extends SelectorComposer<Component> {
             if (lectura.getLecFecha() != null) {
 
                 /*PARA LOS 60*/
-                if (dias >= 60) {
+                if (dias >= 90 && !multaCobrada) {
+                    multaCobrada = Boolean.TRUE;
                     BigDecimal cobroTotalMulta = BigDecimal.ZERO;
+                     BigDecimal valorMultaParametriza = parametrizar.getParMultaCorte()!=null? parametrizar.getParMultaCorte():BigDecimal.ZERO;
                     if (dias >= 360) {
-                        cobroTotalMulta = (parametrizar.getParMultaCorte() != null ? parametrizar.getParMultaCorte() : BigDecimal.ZERO).multiply(BigDecimal.valueOf(6));
+                        cobroTotalMulta = valorMultaParametriza.multiply(BigDecimal.valueOf(6));
                     } else if (dias >= 300) {
-                        cobroTotalMulta = (parametrizar.getParMultaCorte() != null ? parametrizar.getParMultaCorte() : BigDecimal.ZERO).multiply(BigDecimal.valueOf(5));
+                        cobroTotalMulta = valorMultaParametriza.multiply(BigDecimal.valueOf(5));
                     } else if (dias >= 240) {
-                        cobroTotalMulta = (parametrizar.getParMultaCorte() != null ? parametrizar.getParMultaCorte() : BigDecimal.ZERO).multiply(BigDecimal.valueOf(4));
+                        cobroTotalMulta = valorMultaParametriza.multiply(BigDecimal.valueOf(4));
                     } else if (dias >= 180) {
-                        cobroTotalMulta = (parametrizar.getParMultaCorte() != null ? parametrizar.getParMultaCorte() : BigDecimal.ZERO).multiply(BigDecimal.valueOf(3));
+                        cobroTotalMulta = valorMultaParametriza.multiply(BigDecimal.valueOf(3));
                     } else if (dias >= 120) {
-                        cobroTotalMulta = (parametrizar.getParMultaCorte() != null ? parametrizar.getParMultaCorte() : BigDecimal.ZERO).multiply(BigDecimal.valueOf(2));
-                    } else if (dias >= 60) {
-                        cobroTotalMulta = (parametrizar.getParMultaCorte() != null ? parametrizar.getParMultaCorte() : BigDecimal.ZERO).multiply(BigDecimal.valueOf(1));
+                        System.out.println("parametrizar.getParMultaCorte() "+valorMultaParametriza.multiply(BigDecimal.valueOf(2.0)));
+                        cobroTotalMulta = valorMultaParametriza.multiply(BigDecimal.valueOf(2));
+                    } else if (dias >= 90) {
+                        cobroTotalMulta = valorMultaParametriza.multiply(BigDecimal.valueOf(1));
+                        
                     }
                     /*MULTA POR MAS DE 60 DIAS*/
 
@@ -948,7 +956,7 @@ public class Facturar extends SelectorComposer<Component> {
                     valorMulta.setDetSubtotaldescuentoporcantidad(subTotalDescuento.multiply(valorMulta.getCantidad()));
                     valorMulta.setDetTotalconivadescuento(valorMulta.getCantidad().multiply(valorTotalIvaDesc));
                     valorMulta.setDetTotalconiva(valorMulta.getCantidad().multiply(valorMulta.getTotal()));
-                    valorMulta.setLectura(lectura);
+//                    valorMulta.setLectura(lectura);
 
                     valorMulta.setDetCantpordescuento(valorDescuento.multiply(valorMulta.getCantidad()));
 
@@ -3336,11 +3344,10 @@ public class Facturar extends SelectorComposer<Component> {
             Messagebox.show("Verifique el cliente", "Atención", Messagebox.OK, Messagebox.INFORMATION);
         }
     }
-    
-     @Command
+
+    @Command
     public void verHistoricoFac(@BindingParam("valor") Medidor valor) {
 
-        
         try {
             final HashMap<String, Medidor> map = new HashMap<String, Medidor>();
             map.put("valor", valor);
@@ -3469,5 +3476,5 @@ public class Facturar extends SelectorComposer<Component> {
     public void setBuscarCedulaMed(String buscarCedulaMed) {
         this.buscarCedulaMed = buscarCedulaMed;
     }
-    
+
 }

@@ -316,7 +316,7 @@
                                
                                             </div>
                                         </div>
-                                        <div class="col-12 col-sm-12 col-md-2 col-lg-2 "   >
+                                        <div class="col-12 col-sm-12 col-md-4 col-lg-4 "   >
                                   
 
                                             <textbox zclass = "mycss-listcell" 
@@ -328,37 +328,41 @@
                                  
                                         </div>
                                 
-                                        
-                                        <radiogroup Id="idTipoOrdenSinCotizacion"   
-                                                    selectedItem="@bind(vm.tipoVenta)" 
-                                                    onCheck="@command('verificarNumeracion')" >
-                                            <space bar="true"  />
-                                            <radio label="Factura" value="FACT"/>
-                                            <space bar="true"  /> 
-                                        
-                                            <radio label="Proforma" value="PROF"/>               
-                                    
-                           
-                                        </radiogroup>          
+                                        <div class="col-12 col-sm-12 col-md-5 col-lg-5 "   > 
+                                            <radiogroup Id="idTipoOrdenSinCotizacion"   
+                                                        selectedItem="@bind(vm.tipoVenta)" 
+                                                        onCheck="@command('verificarNumeracion')" >
+                                                <space bar="true"  />
+                                                <radio label="Factura" value="FACT"/>
+                                                <space bar="true"  />                                         
+                                                <radio label="Proforma" value="PROF"/>               
+                                                <space bar="true"  /> 
+                                                <radio label="Nota venta" value="NTV"/>                              
+                                            </radiogroup>          
                                 
-                              
+                                        </div>
+                                         
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 "   >
+                                            <label  style="font-weight:bold" value=""  >Forma de Pago</label>
                                         
-                                        <datebox compact="true" value="@bind(vm.fechafacturacion)" 
-                                                 readonly="true" style="font-weight:bold;" 
-                                                 buttonVisible="true" 
-                                                 lenient="true" format="dd/MM/yyyy" 
-                                                 constraint="no empty: Ingrese la fecha "/>
-
-                                        <label  style="font-weight:bold" value=""  >F Pag</label>
-                                        
-                                        <combobox  model="@load(vm.listaFormaPago)"  
-                                                   selectedItem="@bind(vm.formaPagoSelected)" 
-                                                   style="width:110px"  
-                                                   readonly="true" >
-                                            <template name="model">
-                                                <comboitem  label="@bind(each.forNombre)"/>
-                                            </template>                                      
-                                        </combobox>
+                                            <combobox  model="@load(vm.listaFormaPago)"  
+                                                       selectedItem="@bind(vm.formaPagoSelected)" 
+                                                       style="width:110px"  
+                                                       readonly="true" >
+                                          
+                                                <template name="model">
+                                                    <comboitem  label="@bind(each.forNombre)"/>
+                                                </template>                                      
+                                            </combobox>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 "   >
+                                            Fecha:
+                                            <datebox compact="true" value="@bind(vm.fechafacturacion)" 
+                                                     readonly="true" style="font-weight:bold;" 
+                                                     buttonVisible="true" 
+                                                     lenient="true" format="dd/MM/yyyy" 
+                                                     constraint="no empty: Ingrese la fecha "/>
+                                        </div>
                                         <div visible="false">
                                             <label value="" style="color:red;font-weight:bold"/>Plazo:
                 
@@ -394,9 +398,9 @@
                                             </listheader>
                                             <listheader width="15%"   label="COD" align="left" />
                                             <listheader width="10%"   label="CANT" align="left"  />
-                                            <listheader width="10%"   label="% DESC" align="left"  />                                            
-                                            <listheader width="30%"  label="DESCRIPCIÓN" align="left" />
-                                            <listheader width="15%"  label="PRE REAL" align="left" />
+                                            <!--<listheader width="10%"   label="% DESC" align="left"  />-->                                            
+                                            <listheader width="45%"  label="DESCRIPCIÓN" align="left" />
+                                            <!--<listheader width="15%"  label="PRE REAL" align="left" />-->
                                             <listheader width="15%"  label="PRECIO" align="left" />                                         
                                             <listheader width="15%"  label="TOTAL" align="left" />
                                                                                                                             
@@ -427,14 +431,14 @@
                                                                 style="font-size:12px"
                                                                 value="@bind(each.cantidad)"  width="99%" />                                                    
                                                 </listcell>
-                                                <listcell zclass = "mycss-listcell">
-                                                    <!--readonly="${!each.esProducto}"-->
+                                                <!--                                                <listcell zclass = "mycss-listcell">
+                                                    readonly="${!each.esProducto}"
                                                     <textbox  constraint="/^[0-9]{1,9}(?:[.][0-9]{1,2})?$/:Ingrese solo numeros"
                                                               onOK="@command('calcularValoresDesCantidadPorPorcentaje',valor=each)"                                                              
                                                               class="form-control form-control-sm"
                                                               style="font-size:12px"                                                              
                                                               value="@bind(each.detPordescuento)" width="95%"  />
-                                                </listcell>
+                                                </listcell>-->
                                          
                                                 <listcell zclass = "mycss-listcell">
                                                     <textbox  value="@bind(each.descripcion)"
@@ -444,11 +448,11 @@
                                                               width="99%" />
                                                 </listcell>
                                          
-                                                <listcell  zclass = "mycss-listcell">
+                                                <!--                                                <listcell  zclass = "mycss-listcell">
                                                     <decimalbox readonly="true" format="###.##" 
                                                                 class="form-control form-control-sm"
                                                                 value="@bind(each.totalInicial)"  width="99%" />
-                                                </listcell>
+                                                </listcell>-->
                                                 <listcell zclass = "mycss-listcell">
                                                     <textbox    constraint="/^[0-9]{1,9}(?:[.][0-9]{1,2})?$/:Ingrese solo numeros"                                            
                                                                 onOK="@command('calcularValoresDesCantidad',valor=each)"

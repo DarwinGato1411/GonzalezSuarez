@@ -62,7 +62,6 @@ public class ServicioFactura {
 //            factura.setFacLecMes(recuAO.getLectura().getLecMes());
 //            factura.setFacMedidor(recuAO.getLectura().getIdMedidor().getMedNumero());
 //            factura.setFacDirMedidor(recuAO.getLectura().getIdMedidor().getMedDireccion() != null ? recuAO.getLectura().getIdMedidor().getMedDireccion() : "S/N");
-
             em.persist(factura);
             em.flush();
             DetalleFactura detalleFactura = null;
@@ -106,12 +105,15 @@ public class ServicioFactura {
                 detalleFactura.setDetMetrosCubicos(item.getLectura() != null ? item.getLectura().getLecMetrosCubicos() : BigDecimal.ZERO);
                 detalleFactura.setDetLecMes(item.getLectura() != null ? item.getLectura().getLecMes() : 0);
                 detalleFactura.setDetMedidor(item.getLectura() != null ? item.getLectura().getIdMedidor().getMedNumero() : "");
-                detalleFactura.setDetDirMedidor(item.getLectura() != null ? item.getLectura().getIdMedidor().getMedBarrio(): "");
+                detalleFactura.setDetDirMedidor(item.getLectura() != null ? item.getLectura().getIdMedidor().getMedBarrio() : "");
                 detalleFactura.setIdLectura(item.getLectura());
                 // servicioDetalleFactura.crear(detalleFactura);
-                Lectura actual=item.getLectura();
-                actual.setLecPagada("S");
-                em.merge(actual);
+                if (item.getLectura() != null) {
+                    Lectura actual = item.getLectura();
+                    actual.setLecPagada("S");
+                    em.merge(actual);
+                    detalleFactura.setIdLectura(actual);
+                }
                 em.persist(detalleFactura);
                 em.flush();
             }

@@ -12,7 +12,6 @@
             <progressmeter id="pm" width="100px" style="align:rigth" value="100" onCancel="@command('cerrar')" />
         </caption> 
         
-        <iframe height="100%" class="col-12 col-sm-12 col-md-12 col-lg-12" id="reportframe1"
-                
+        <iframe height="100%" class="col-12 col-sm-12 col-md-12 col-lg-12" id="reportframe1"                
                 content="@bind(vm.fileContent)"/>       
     </window>

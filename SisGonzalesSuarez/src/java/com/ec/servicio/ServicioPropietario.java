@@ -79,7 +79,7 @@ public class ServicioPropietario {
             //Connection connection = em.unwrap(Connection.class);
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT  a FROM Propietario a WHERE a.porpCedula LIKE :porpCedula OR a.propNombre LIKE :propNombre OR a.propApellido LIKE :propApellido ORDER BY a.propApellido ASC");
+            Query query = em.createQuery("SELECT  a FROM Propietario a WHERE a.porpCedula LIKE :porpCedula OR a.propNombre LIKE :propNombre OR a.propApellido LIKE :propApellido ORDER BY a.propSector ASC");
             query.setParameter("porpCedula", "%" + valor + "%");
             query.setParameter("propNombre", "%" + valor + "%");
             query.setParameter("propApellido", "%" + valor + "%");

@@ -6,19 +6,10 @@ package com.ec.entidad;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -37,7 +28,7 @@ public class HistorialPagoAgua implements Serializable {
     @Column(name = "cli_cedula")
     private String cliCedula;
     @Column(name = "det_descripcion")
-    private String detDescriocion;
+    private String detDescripcion;
     @Column(name = "fac_lec_anterior")
     private BigDecimal facLecAnterior;
     @Column(name = "fac_lec_actual")
@@ -50,6 +41,9 @@ public class HistorialPagoAgua implements Serializable {
     private Integer facLecMes;
     @Column(name = "mes_text")
     private String mesText;
+    
+    @Column(name = "det_medidor")
+    private String detMedidor;
     
 
     public HistorialPagoAgua() {
@@ -71,14 +65,7 @@ public class HistorialPagoAgua implements Serializable {
         this.cliCedula = cliCedula;
     }
 
-    public String getDetDescriocion() {
-        return detDescriocion;
-    }
-
-    public void setDetDescriocion(String detDescriocion) {
-        this.detDescriocion = detDescriocion;
-    }
-
+ 
     public BigDecimal getFacLecAnterior() {
         return facLecAnterior;
     }
@@ -125,6 +112,22 @@ public class HistorialPagoAgua implements Serializable {
 
     public void setMesText(String mesText) {
         this.mesText = mesText;
+    }
+
+    public String getDetMedidor() {
+        return detMedidor;
+    }
+
+    public void setDetMedidor(String detMedidor) {
+        this.detMedidor = detMedidor;
+    }
+
+    public String getDetDescripcion() {
+        return detDescripcion;
+    }
+
+    public void setDetDescripcion(String detDescripcion) {
+        this.detDescripcion = detDescripcion;
     }
 
    

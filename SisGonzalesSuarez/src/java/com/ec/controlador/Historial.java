@@ -41,7 +41,7 @@ public class Historial {
      @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") Medidor medidor, @ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
-        listaDatosHistorial = servicioHistorialVentaAgua.findHistorial(medidor.getIdPredio().getIdPropietario().getPorpCedula());
+        listaDatosHistorial = servicioHistorialVentaAgua.findHistorial(medidor.getMedNumero());
 
     }
 

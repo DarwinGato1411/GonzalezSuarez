@@ -116,9 +116,6 @@
                         <comboitem label="BELLAVISTA" value="BELLAVISTA" />
                         <comboitem label="CENTRO" value="CENTRO" />
                         <comboitem label="COMUNIDAD MARISCAL SUCRE" value="COMUNIDAD MARISCAL SUCRE" />
-                        <comboitem label="COMUNIDAD MARISCAL SUCRE" value="COMUNIDAD MARISCAL SUCRE" />
-                        <comboitem label="COMUNIDAD GUALACATA" value="COMUNIDAD GUALACATA" />
-                        <comboitem label="COMUNIDAD GUALACATA" value="COMUNIDAD GUALACATA" />
                         <comboitem label="COMUNIDAD GUALACATA" value="COMUNIDAD GUALACATA" />
                         <comboitem label="LA COSTA" value="LA COSTA" />
                     </combobox>   

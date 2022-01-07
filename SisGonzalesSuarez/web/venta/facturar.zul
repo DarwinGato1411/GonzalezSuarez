@@ -132,8 +132,8 @@
                                     </listbox>   
                                     
                                     <listbox  width="100%" model="@load(vm.listaDatosLectura)" 
-                                              height="150px"
-                                              mold="paging" pageSize="4"
+                                              height="300px"
+                                              mold="paging" pageSize="12"
                                               checkmark="false"  
                                               multiple="false"              
                                               nonselectableTags=""
@@ -205,7 +205,7 @@
                                     </listbox>   
                                     
                                     <listbox model="@load(vm.listaKardexProducto)" 
-                                             nonselectableTags=""    mold="paging" pageSize="5"  >
+                                             nonselectableTags=""    mold="paging" pageSize="3"  >
                                         <custom-attributes org.zkoss.zul.listbox.rod="true"/>
       
                     
@@ -277,24 +277,7 @@
                                     
                                  
                                     <div class=" row col-12 col-sm-12 col-md-12 col-lg-12 hidden-sm-down"   >
-<!--                                        <div class="input-group mb-12 col-12 col-sm-12 col-md-1 col-lg-1">
-                                    
-                                            <textbox   class="form-control form-control-sm"
-                                                       style="font-size:10px;background-color:trasnsparent;font-weight:bold"                                                   
-                                                       placeholder="# medidor"
-                                                       value="@bind(vm.numeroMedidor)"                                                 
-                                                       onOK="@command('buscarMedidor')"
-                                                       maxlength="13"  />
-                        
-                                            <div class="input-group-append" >
-                                                <button   image="/imagenes/buscar1.png" 
-                                                          onClick="@command('buscarMedidor')"  
-                                                          tooltiptext="Buscar medidor"
-                                                          class="btn  btn-primary btn-sm "/>
-                               
-                               
-                                            </div>
-                                        </div>-->
+
                                         <div class="input-group mb-12 col-12 col-sm-12 col-md-3 col-lg-3">
                                     
                                             <textbox   class="form-control form-control-sm"
@@ -342,12 +325,12 @@
                                 
                                         </div>
                                          
-                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 "   >
+                                        <div class="col-12 col-sm-12 col-md-7 col-lg-7 "   >
                                             <label  style="font-weight:bold" value=""  >Forma de Pago</label>
                                         
                                             <combobox  model="@load(vm.listaFormaPago)"  
                                                        selectedItem="@bind(vm.formaPagoSelected)" 
-                                                       style="width:110px"  
+                                                          style="width:70%"  
                                                        readonly="true" >
                                           
                                                 <template name="model">
@@ -355,15 +338,15 @@
                                                 </template>                                      
                                             </combobox>
                                         </div>
-                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 "   >
-                                            Fecha:
+                                        <div class="col-12 col-sm-12 col-md-5 col-lg-5 "   >
+                                            <label  style="font-weight:bold" value=""  >Fecha.</label>
                                             <datebox compact="true" value="@bind(vm.fechafacturacion)" 
                                                      readonly="true" style="font-weight:bold;" 
                                                      buttonVisible="true" 
                                                      lenient="true" format="dd/MM/yyyy" 
                                                      constraint="no empty: Ingrese la fecha "/>
                                         </div>
-                                        <div visible="false">
+<!--                                        <div visible="false">
                                             <label value="" style="color:red;font-weight:bold"/>Plazo:
                 
                                             <combobox onSelect="@command('actualizarCostoVenta')"  
@@ -377,7 +360,7 @@
                                                 <comboitem label="90 DIAS" value="90" />
                                                 <comboitem label="120 DIAS" value="120" />
                                             </combobox>
-                                        </div>
+                                        </div>-->
                                     </div>
                                     <listbox 
                                         model="@load(vm.listaDetalleFacturaDAOMOdel)"
@@ -473,16 +456,12 @@
                                         </template>
 
                                     </listbox>
-                                </div>                         
-                            </div>
-                         
-                         
-                        </div>
-                        <div class="row  " style="margin-top:5px">
+                                    
+                                    <div class="row  " style="margin-top:5px">
                             <div class="  col-12 col-sm-12 col-md-12 col-lg-12">
-                                <toolbar  id="tb" height="65px"  align="end" style="background-color:#d6eefd;" >
+                                <toolbar  id="tb" height="120px"  align="end" style="background-color:#d6eefd;" >
                                     <div class="row  col-12 col-sm-12 col-md-12 col-lg-12">
-                                        <div class="col-12 col-sm-12 col-md-1 col-lg-1">                            
+                                        <div class="col-12 col-sm-12 col-md-3 col-lg-3">                            
                                             <label value="SINDESCUEN" 
                                                    style="font-weight:bold;font-size:0.8em"/>
       
@@ -493,7 +472,7 @@
                                                          style="text-align:center;font-size:2em;background-color:#90FFBF;"
                                                          onChange="self.setValue(self.getValue().toUpperCase().trim());"  />
                                         </div>
-                                        <div class="col-12 col-sm-12 col-md-1 col-lg-1">
+                                        <div class="col-12 col-sm-12 col-md-2 col-lg-2">
                                             <label value="DESCUENTO" class="form-control-sm"
                                                    style="font-weight:bold;font-size:0.8em"/>
                               
@@ -507,7 +486,7 @@
                                                          class="form-control-sm" />
                                         </div>   
                                 
-                                        <div class="col-12 col-sm-12 col-md-1 col-lg-1">         
+<!--                                        <div class="col-12 col-sm-12 col-md-2 col-lg-2">         
                                             <label value="BASE12%" class="form-control-sm" 
                                                    style="font-weight:bold;font-size:0.8em"/>
                                                                   
@@ -519,7 +498,7 @@
                                                          class="form-control-sm" />
                                         </div>   
                                 
-                                        <div class="col-12 col-sm-12 col-md-1 col-lg-1">       
+                                        <div class="col-12 col-sm-12 col-md-2 col-lg-2">       
                                             <label value="BASE0%" class="form-control-sm" 
                                                    style="font-weight:bold;font-size:0.8em"/>
                                
@@ -529,9 +508,9 @@
                                                          readonly="true" style="text-align:center;font-size:2em"
                                                          onChange="self.setValue(self.getValue().toUpperCase().trim());" 
                                                          class="form-control-sm" />
-                                        </div>   
+                                        </div>   -->
                                 
-                                        <div class="col-12 col-sm-12 col-md-1 col-lg-1">     
+                                        <div class="col-12 col-sm-12 col-md-2 col-lg-2">     
                                             <label value="T. IVA" class="form-control-sm" 
                                                    style="font-weight:bold;font-size:0.8em"/>
                                 
@@ -542,7 +521,7 @@
                                                          class="form-control-sm" />
                                         </div>   
                                 
-                                        <div class="col-12 col-sm-12 col-md-1 col-lg-1">    
+                                        <div class="col-12 col-sm-12 col-md-3 col-lg-3">    
                                             <label value="TOTAL" class="form-control-sm" 
                                                    style="font-weight:bold;font-size:0.8em"/>
                               
@@ -556,7 +535,7 @@
                                                          class="form-control-sm" />
                                         </div>   
                                 
-                                        <div class="col-12 col-sm-12 col-md-1 col-lg1">    
+<!--                                        <div class="col-12 col-sm-12 col-md-1 col-lg1">    
                                             <label value="COBRAR:" class="form-control-sm"
                                                    style="font-weight:bold;font-size:0.8em"/>
                                
@@ -566,9 +545,9 @@
                                                         class="form-control-sm"
                                                         value="@bind(vm.cobro)"
                                                         style="text-align:center;font-size:2em;color:green" />
-                                        </div>   
+                                        </div>   -->
                                 
-                                        <div class="col-12 col-sm-12 col-md-1 col-lg-1">   
+<!--                                        <div class="col-12 col-sm-12 col-md-1 col-lg-1">   
                                             <label value="CAMBIO:" class="form-control-sm" 
                                                    style="font-weight:bold;font-size:0.8em"/>
                                 
@@ -579,39 +558,45 @@
                                                          value="@bind(vm.cambio)" 
                                                          style="text-align:center;font-size:2em;color:blue"/>
                                
-                                        </div>   
+                                                    </div>   -->
                          
-                                        <div class="col-12 col-sm-12 col-md-1 col-lg-1">   
-                                            <button src="/iconos/fact.png"   
-                                                    autodisable="self"
-                                                    style="height:50px "                                                   
-                                                    class="btn btn btn-secondary btn-sm "
-                                                    onClick="@command('verNotasEntrega')"
-                                                    tooltiptext="Cargar notas de entrega"/>
-                                        </div>   
-                                        <div class="col-12 col-sm-12 col-md-1 col-lg-1">   
-                                            <label  class=" col-12 col-sm-12 col-md-12 col-lg-12 "
-                                                    style="color:transparent;font-weight:bold;font-size:15px" 
-                                                    value="@bind(vm.numeroFacturaText)"  >
-                                            </label>
-                                        </div>   
+                                                    <!--                                        <div class="col-12 col-sm-12 col-md-1 col-lg-1">   
+                                                        <button src="/iconos/fact.png"   
+                                                                autodisable="self"
+                                                                style="height:50px "                                                   
+                                                                class="btn btn btn-secondary btn-sm "
+                                                                onClick="@command('verNotasEntrega')"
+                                                                tooltiptext="Cargar notas de entrega"/>
+                                                    </div>   -->
+                                                    <!--                                        <div class="col-12 col-sm-12 col-md-1 col-lg-1">   
+                                                        <label  class=" col-12 col-sm-12 col-md-12 col-lg-12 "
+                                                                style="color:transparent;font-weight:bold;font-size:15px" 
+                                                                value="@bind(vm.numeroFacturaText)"  >
+                                                        </label>
+                                                    </div>   -->
                                     
                                 
-                                        <div class=" col-12 col-sm-12 col-md-2 col-lg-2" align="end">   
-                                            <button src="/iconos/guardar.png"  
-                                                    style="height:50px "            
-                                                    autodisable="self"
-                                                    label="Guardar"
-                                                    class="btn btn btn-success btn-sm "
-                                                    onClick="@command('Guardar',valor='SG')"
-                                                    tooltiptext="Guardar factura"/>                      
-                                        </div>   
+                                                    <div class=" col-12 col-sm-12 col-md-2 col-lg-2" align="end" style="margin-top:5px">   
+                                                        <button src="/iconos/guardar.png"  
+                                                                style="height:50px "            
+                                                                autodisable="self"
+                                                                label="Guardar"
+                                                                class="btn btn btn-success btn-sm "
+                                                                onClick="@command('Guardar',valor='SG')"
+                                                                tooltiptext="Guardar factura"/>                      
+                                                    </div>   
                                 
                            
+                                                </div>
+                                            </toolbar>
+                                        </div>
                                     </div>
-                                </toolbar>
+                                </div>                         
                             </div>
+                         
+                         
                         </div>
+                        
                     </div>
                     
                     

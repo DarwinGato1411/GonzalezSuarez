@@ -44,21 +44,21 @@
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="74" height="20"/>
+				<reportElement x="20" y="0" width="74" height="20"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
-				<text><![CDATA[Numero]]></text>
+				<text><![CDATA[Medidor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="74" y="0" width="62" height="20"/>
+				<reportElement x="94" y="0" width="62" height="20"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Cedula]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="136" y="0" width="140" height="20"/>
+				<reportElement x="156" y="0" width="130" height="20"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
@@ -79,32 +79,39 @@
 				<text><![CDATA[dias_mora]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="276" y="0" width="140" height="20"/>
+				<reportElement x="286" y="0" width="130" height="20"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[prop_apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="20" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="74" height="20"/>
+				<reportElement x="20" y="0" width="74" height="20"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{med_numero}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="74" y="0" width="62" height="20"/>
+				<reportElement x="94" y="0" width="62" height="20"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{porp_cedula}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="136" y="0" width="140" height="20"/>
+				<reportElement x="156" y="0" width="130" height="20"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
@@ -125,11 +132,16 @@
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{dias_mora}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="276" y="0" width="140" height="20"/>
+				<reportElement x="286" y="0" width="130" height="20"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{prop_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="20" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

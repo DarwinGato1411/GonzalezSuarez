@@ -29,15 +29,17 @@ public class ServicioMorosos {
         this.em = em;
     }
 
-    public List<PropietariosMorosos> findMorosos(String propietario) {
 
-        List<PropietariosMorosos> listaMorosos = new ArrayList<PropietariosMorosos>();
+    public List<PropietariosMorosos> findMorosos(String propNombre) {
+
+        List<PropietariosMorosos> listado = new ArrayList<PropietariosMorosos>();
         try {
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT a FROM PropietariosMorosos a WHERE a.propNombre LIKE :propNombre ORDER BY a.propNombre ASC");      
-            query.setParameter("propNombre", "%" + propietario + "%");
-            listaMorosos = (List<PropietariosMorosos>) query.getResultList();
+            Query query = em.createQuery("SELECT a FROM PropietariosMorosos a WHERE a.propNombre LIKE :propNombre ORDER BY a.propApellido ASC");
+            query.setParameter("propNombre", "%" + propNombre + "%");
+            listado = (List<PropietariosMorosos>) query.getResultList();
+
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error en las consulta SriCatastro " + e.getMessage());
@@ -45,7 +47,8 @@ public class ServicioMorosos {
             em.close();
         }
 
-        return listaMorosos;
+        return listado;
+
     }
     
     public List<PropietariosMorosos> findLikeCedulaNombreMorosos(String valor) {

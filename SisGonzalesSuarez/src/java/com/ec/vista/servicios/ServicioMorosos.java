@@ -4,7 +4,9 @@
  */
 package com.ec.vista.servicios;
 
+import com.ec.entidad.Propietario;
 import com.ec.servicio.HelperPersistencia;
+import com.ec.vistas.PropietariosMorosos;
 import com.ec.vistas.SriCatastro;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +29,15 @@ public class ServicioMorosos {
         this.em = em;
     }
 
-    public List<SriCatastro> findMorosos(String valor) {
+    public List<PropietariosMorosos> findMorosos(String propietario) {
 
-        List<SriCatastro> listaSriCatastros = new ArrayList<SriCatastro>();
+        List<PropietariosMorosos> listaMorosos = new ArrayList<PropietariosMorosos>();
         try {
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT a FROM PropietariosMorosos a ORDER BY a.propApellido ASC");      
-            listaSriCatastros = (List<SriCatastro>) query.getResultList();
+            Query query = em.createQuery("SELECT a FROM PropietariosMorosos a WHERE a.propNombre LIKE :propNombre ORDER BY a.propNombre ASC");      
+            query.setParameter("propNombre", "%" + propietario + "%");
+            listaMorosos = (List<PropietariosMorosos>) query.getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error en las consulta SriCatastro " + e.getMessage());
@@ -42,7 +45,31 @@ public class ServicioMorosos {
             em.close();
         }
 
-        return listaSriCatastros;
+        return listaMorosos;
     }
+    
+    public List<PropietariosMorosos> findLikeCedulaNombreMorosos(String valor) {
+
+        List<PropietariosMorosos> listaMorosos = new ArrayList<PropietariosMorosos>();
+        try {
+            //Connection connection = em.unwrap(Connection.class);
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT  a FROM PropietariosMorosos a WHERE a.porpCedula LIKE :porpCedula OR a.propNombre LIKE :propNombre OR a.propApellido LIKE :propApellido ORDER BY a.propNombre ASC");
+            query.setParameter("porpCedula", "%" + valor + "%");
+            query.setParameter("propNombre", "%" + valor + "%");
+            query.setParameter("propApellido", "%" + valor + "%");
+            //query.setMaxResults(200);
+            listaMorosos = (List<PropietariosMorosos>) query.getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta propietario findLikeCedulaNombre " + e.getMessage());
+        } finally {
+            em.close();
+        }
+
+        return listaMorosos;
+    }
+
 
 }

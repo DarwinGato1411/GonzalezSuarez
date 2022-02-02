@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="morosos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.610510000000001"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<queryString language="SQL">
-		<![CDATA[select * from cliente]]>
+	<queryString>
+		<![CDATA[select * from propietarios_morosos;]]>
 	</queryString>
-	<field name="id_cliente" class="java.lang.Integer"/>
-	<field name="cli_cedula" class="java.lang.String"/>
-	<field name="cli_nombre" class="java.lang.String"/>
-	<field name="cli_razon_social" class="java.lang.String"/>
-	<field name="cli_direccion" class="java.lang.String"/>
-	<field name="cli_telefono" class="java.lang.String"/>
-	<field name="cli_movil" class="java.lang.String"/>
-	<field name="cli_correo" class="java.lang.String"/>
-	<field name="clie_fecha_registro" class="java.sql.Date"/>
-	<field name="clie_tipo" class="java.lang.Integer"/>
-	<field name="id_tipo_identificacion" class="java.lang.Integer"/>
-	<field name="cli_nombres" class="java.lang.String"/>
-	<field name="cli_apellidos" class="java.lang.String"/>
-	<field name="ciudad" class="java.lang.String"/>
-	<field name="cli_clave" class="java.lang.String"/>
-	<field name="cli_monto_asignado" class="java.math.BigDecimal"/>
+	<field name="id_medidor" class="java.lang.Integer"/>
+	<field name="porp_cedula" class="java.lang.String"/>
+	<field name="prop_nombre" class="java.lang.String"/>
+	<field name="prop_apellido" class="java.lang.String"/>
+	<field name="med_numero" class="java.lang.String"/>
+	<field name="fecha_ultimo_pago" class="java.sql.Date"/>
+	<field name="dias_mora" class="java.lang.Double"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -34,38 +25,92 @@
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="14" y="0" width="100" height="20"/>
-				<textElement/>
-				<text><![CDATA[cli_cedula]]></text>
+				<reportElement x="0" y="0" width="74" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Numero]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="141" y="0" width="100" height="20"/>
-				<textElement/>
-				<text><![CDATA[cli_nombre]]></text>
+				<reportElement x="74" y="0" width="62" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Cedula]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="271" y="0" width="100" height="20"/>
-				<textElement/>
-				<text><![CDATA[cli_razon_social]]></text>
+				<reportElement x="136" y="0" width="140" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[prop_nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="416" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[fecha_ultimo_pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="516" y="0" width="39" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[dias_mora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="0" width="140" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[prop_apellido]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="14" y="0" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{cli_cedula}]]></textFieldExpression>
+				<reportElement x="0" y="0" width="74" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{med_numero}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="141" y="0" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{cli_nombre}]]></textFieldExpression>
+				<reportElement x="74" y="0" width="62" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{porp_cedula}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="271" y="0" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{cli_razon_social}]]></textFieldExpression>
+				<reportElement x="136" y="0" width="140" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{prop_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="416" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fecha_ultimo_pago}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement x="516" y="0" width="39" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{dias_mora}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="276" y="0" width="140" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{prop_apellido}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

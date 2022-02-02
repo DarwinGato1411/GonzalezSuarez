@@ -204,9 +204,14 @@ public class MenuOpciones extends SelectorComposer<Component> {
         Executions.sendRedirect("/compra/listaretencioncasillero.zul");
     }
     
-    @Listen("onClick = #btnReporteClientes")
-    public void btnReporteClientes() {
-        Executions.sendRedirect("/administrar/reporteclientes.zul");
+    @Listen("onClick = #btnReportePropietarios")
+    public void btnReportePropietarios() {
+        Executions.sendRedirect("/administrar/reportepropietarios.zul");
+    }
+    
+    @Listen("onClick = #btnReporteMorosos")
+    public void btnReporteMorosos() {
+        Executions.sendRedirect("/administrar/reportemorosos.zul");
     }
 
     @Listen("onClick = #btnFactAutori")

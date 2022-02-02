@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/css/boostrap/bootstrap.css"?>  
+<?link rel="stylesheet" type="text/css" href="/css/style.css"?>
+<?init class="com.ec.seguridad.Autentificador"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantilla/plantilla.zul"?>
+<?link rel="icon" type="image/x-icon" href="/iconos/deckxel.ico"?>
+<zk  contentStyle="overflow:auto" with="100%" >
+    <hbox self="@define(content)" apply="org.zkoss.bind.BindComposer" 
+          viewModel="@id('vm') @init('com.ec.controlador.AdministraReporteMorosos')" width="100%">
+        <tabbox id="tboxPrincipal"  width="100%">
+            <tabs >
+                <tab label="Reporte de Propietarios" sclass="menutabs" /> 
+                
+            </tabs>
+            <tabpanels >
+                
+                <tabpanel  height="98%" width="99%"  >                    
+                
+                    <listbox  width="98%" model="@load(vm.listaPropietariosMorosos)" 
+                              mold="paging" pageSize="50"
+                              checkmark="false"  
+                              multiple="false"              
+                              nonselectableTags="*">
+                        <custom-attributes org.zkoss.zul.listbox.rod="true"/>
+                        <auxhead>
+                            <auxheader colspan="10" >
+                                
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 " align="start"  >
+                                    <button  src="/iconos/excel1.png"
+                                                 label="Exportar Excel" style="font-weight: bold;"
+                                                 class="btn btn btn-secondary btn-sm "
+                                                 onClick="@command('exportEXCEL')"
+                                                 tooltiptext="Exportar Excel"/>
+                                
+                                    <button  src="/iconos/pdfrep2.png"
+                                                 
+                                                 label="Exportar Pdf" style="font-weight: bold;"
+                                                 class="btn btn btn-secondary btn-sm "
+                                                 onClick="@command('reporteProveedoresMorosos')"
+                                                 tooltiptext="Descargar Proveedores"/>
+                                </div> 
+                            </auxheader>
+                        </auxhead>
+                        <listhead>             
+                            <listheader width="10%"   >
+                                <textbox value="@bind(vm.buscarMorosos)" 
+                                         class="form-control form-control-sm"
+                                         tooltiptext="Buscar "                         
+                                         placeholder="Buscar"
+                                         onOK="@command('buscarPropietarioMorosos')"
+                                         onChange="self.setValue(self.getValue().toUpperCase());" />
+                            </listheader>  
+                            <listheader width="25%"  label="Nombres" />  
+                            <listheader width="25%"  label="Apellidos" />  
+                            <listheader width="20%"  label="Medidor" />
+                            <listheader width="10%"  label="Fecha ultimo pagoo" /> 
+                            <listheader width="10%"  label="Dias Mora" />                        
+                        </listhead>  
+                        <template name="model">                                                            
+                            <listitem>                
+                                <listcell zclass = "mycss-listcell">
+                                    <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
+                                             class="form-control form-control-sm"  
+                                             value="@bind(each.porpCedula)"  />
+                                </listcell>
+                                <listcell zclass = "mycss-listcell">
+                                    <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
+                                             class="form-control form-control-sm"  
+                                             value="@bind(each.propNombre)"  />
+                                </listcell>
+                                <listcell zclass = "mycss-listcell">
+                                    <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
+                                             class="form-control form-control-sm"  
+                                             value="@bind(each.propApellido)"  />
+                                </listcell>
+               
+                                <listcell zclass = "mycss-listcell">
+                                    <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
+                                             class="form-control form-control-sm"  
+                                             value="@bind(each.medNumero)"  />
+                                </listcell>
+               
+                                <listcell zclass = "mycss-listcell">
+                                    <datebox compact="true" 
+                                             value="@bind(each.fechaUltimoPago)" 
+                                             buttonVisible="false" lenient="true" 
+                                             tooltiptext="Fecha"
+                                             readonly="true"
+                                             format="medium" width="98%"  />
+                                </listcell>
+                                <listcell zclass = "mycss-listcell">
+                                    <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
+                                             class="form-control form-control-sm"  
+                                             value="@bind(each.diasMora)"  />
+                                </listcell>
+                                <!--                                <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">    
+                                    <image src="/iconos/editar.png"
+                                           class="grow"
+                                           onClick="@command('actualizar',valor=each)" 
+                                           tooltiptext="Modificar producto"/> 
+                                </listcell>-->
+                            </listitem>
+                        </template>
+                    </listbox>
+                </tabpanel>                
+            </tabpanels>
+            
+        </tabbox>
+    </hbox>
+
+
+</zk>

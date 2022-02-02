@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/css/boostrap/bootstrap.css"?>  
+<?link rel="stylesheet" type="text/css" href="/css/style.css"?>
+<?init class="com.ec.seguridad.Autentificador"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantilla/plantilla.zul"?>
+<?link rel="icon" type="image/x-icon" href="/iconos/deckxel.ico"?>
+<zk  contentStyle="overflow:auto" with="100%" >
+    <hbox self="@define(content)" apply="org.zkoss.bind.BindComposer" 
+          viewModel="@id('vm') @init('com.ec.controlador.AdministraReportePropietarios')" width="100%">
+        <tabbox id="tboxPrincipal"  width="100%">
+            <tabs >
+                <tab label="Reporte de Proveedores" sclass="menutabs" /> 
+                
+            </tabs>
+            <tabpanels >
+                
+                <tabpanel  height="98%" width="99%"  >                    
+                
+                    <listbox  width="98%" model="@load(vm.listaPropietarios)" 
+                              mold="paging" pageSize="50"
+                              checkmark="false"  
+                              multiple="false"              
+                              nonselectableTags="*">
+                        <custom-attributes org.zkoss.zul.listbox.rod="true"/>
+                        <auxhead>
+                            <auxheader colspan="10" >
+                                
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 " align="start"  >
+                                        <button  src="/iconos/excel1.png"
+                                                 label="Exportar Excel" style="font-weight: bold;"
+                                                 class="btn btn btn-secondary btn-sm "
+                                                 onClick="@command('exportEXCEL')"
+                                                 tooltiptext="Exportar Excel"/>
+                                
+                                        <button  src="/iconos/pdfrep2.png"
+                                                 
+                                                 label="Exportar Pdf" style="font-weight: bold;"
+                                                 class="btn btn btn-secondary btn-sm "
+                                                 onClick="@command('reporteProveedoresGeneral')"
+                                                 tooltiptext="Descargar Proveedores"/>
+                                    </div> 
+                            </auxheader>
+                        </auxhead>
+                        <listhead>             
+                            <listheader width="10%"   >
+                                <textbox value="@bind(vm.buscar)" 
+                                         class="form-control form-control-sm"
+                                         tooltiptext="Buscar "                         
+                                         placeholder="Buscar"
+                                         onOK="@command('buscarPropietario')"
+                                         onChange="self.setValue(self.getValue().toUpperCase());" />
+                            </listheader>     
+                            <listheader width="20%"  label="Nombres" >              
+                            </listheader> 
+                            <listheader width="20%"  label="Apellidos" sort="auto(propApellido)" >              
+                            </listheader> 
+                            <listheader width="10%"  label="Sector" />
+                       
+                            <listheader width="10%"  label="Fecha" />              
+                            <listheader width="5%"  label="Edad" />  
+                            <listheader width="35%"  label="Direccion" />                  
+          
+                        </listhead>  
+                        <template name="model">                                                            
+                            <listitem>                
+                                <listcell zclass = "mycss-listcell">
+                                    <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
+                                             class="form-control form-control-sm"  
+                                             value="@bind(each.porpCedula)"  />
+                                </listcell>
+                                <listcell zclass = "mycss-listcell">
+                                    <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
+                                             class="form-control form-control-sm"  
+                                             value="@bind(each.propNombre)"  />
+                                </listcell>
+                                <listcell zclass = "mycss-listcell">
+                                    <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
+                                             class="form-control form-control-sm"  
+                                             value="@bind(each.propApellido)"  />
+                                </listcell>
+               
+                                <listcell zclass = "mycss-listcell">
+                                    <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
+                                             class="form-control form-control-sm"  
+                                             value="@bind(each.propSector)"  />
+                                </listcell>
+               
+                                <listcell zclass = "mycss-listcell">
+                
+                    
+                                    <datebox compact="true" 
+                                             value="@bind(each.porpFechaNac)" 
+                                             buttonVisible="false" lenient="true" 
+                                             tooltiptext="Fecha"
+                                             readonly="true"
+                                             format="medium" width="98%"  />
+                                </listcell>
+                                <listcell zclass = "mycss-listcell">
+                
+                    
+                                    <intbox value="@bind(each.propEdad)"                              
+                                            tooltiptext="Fecha"
+                                            readonly="true" width="98%"  />
+                                </listcell>
+                                <listcell zclass = "mycss-listcell">
+                                    <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
+                                             class="form-control form-control-sm"  
+                                             value="@bind(each.propDireccion)"  />
+                                </listcell>
+<!--                                <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">    
+                                    <image src="/iconos/editar.png"
+                                           class="grow"
+                                           onClick="@command('actualizar',valor=each)" 
+                                           tooltiptext="Modificar producto"/> 
+                                </listcell>-->
+                            </listitem>
+                        </template>
+                    </listbox>
+                </tabpanel>                
+            </tabpanels>
+            
+        </tabbox>
+    </hbox>
+
+
+</zk>

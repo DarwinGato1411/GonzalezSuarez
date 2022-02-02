@@ -6,6 +6,7 @@
 package com.ec.vistas;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -47,7 +48,7 @@ public class PropietariosMorosos implements Serializable {
     private Date fechaUltimoPago;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "dias_mora")
-    private Double diasMora;
+    private BigDecimal diasMora;
 
     public PropietariosMorosos() {
     }
@@ -100,12 +101,14 @@ public class PropietariosMorosos implements Serializable {
         this.fechaUltimoPago = fechaUltimoPago;
     }
 
-    public Double getDiasMora() {
+    public BigDecimal getDiasMora() {
         return diasMora;
     }
 
-    public void setDiasMora(Double diasMora) {
+    public void setDiasMora(BigDecimal diasMora) {
         this.diasMora = diasMora;
     }
+
+   
     
 }

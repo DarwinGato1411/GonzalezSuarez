@@ -6,6 +6,7 @@ package com.ec.controlador;
 
 import com.ec.entidad.Medidor;
 import com.ec.entidad.Predio;
+import com.ec.entidad.Propietario;
 import com.ec.entidad.Tarifa;
 import com.ec.servicio.ServicioGeneral;
 import com.ec.servicio.ServicioMedidor;
@@ -13,16 +14,19 @@ import com.ec.servicio.ServicioPredio;
 import com.ec.servicio.ServicioTarifa;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.zkoss.bind.annotation.AfterCompose;
+import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
@@ -50,12 +54,15 @@ public class NuevoMedidor {
     private List<Tarifa> listatarifas = new ArrayList<Tarifa>();
     private Tarifa tarifaSelected = null;
 
-    ServicioGeneral servicioGeneral= new ServicioGeneral();
+    ServicioGeneral servicioGeneral = new ServicioGeneral();
+
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") Medidor valor, @ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
         if (valor != null) {
             this.entidad = valor;
+            //como capturar los datos
+//            Propietario propietario=   valor.getIdPredio().getIdPropietario();
             accion = "update";
             tarifaSelected = valor.getIdTarifa();
             listaPredios.add(valor.getIdPredio());
@@ -122,20 +129,36 @@ public class NuevoMedidor {
                 && !entidad.getMedNumero().equals("")) {
 
             if (accion.equals("create")) {
-                 System.out.println("MES: "+entidad.getMedFechaRegistro().getMonth());
-                System.out.println("FECHA: "+entidad.getMedFechaRegistro());
+                System.out.println("MES: " + entidad.getMedFechaRegistro().getMonth());
+                System.out.println("FECHA: " + entidad.getMedFechaRegistro());
                 servicioMedidor.crear(entidad);
-               
-                 servicioGeneral.iniciarLecturaMedidor(entidad.getMedFechaRegistro().getMonth()+1,entidad.getMedFechaRegistro());
+
+                servicioGeneral.iniciarLecturaMedidor(entidad.getMedFechaRegistro().getMonth() + 1, entidad.getMedFechaRegistro());
             } else {
-                 System.out.println("MES dddd: "+entidad.getMedFechaRegistro().getMonth());
-                System.out.println("FECHA  ddd: "+entidad.getMedFechaRegistro());
+                System.out.println("MES dddd: " + entidad.getMedFechaRegistro().getMonth());
+                System.out.println("FECHA  ddd: " + entidad.getMedFechaRegistro());
                 servicioMedidor.modificar(entidad);
             }
             wMedidor.detach();
         } else {
 
             Clients.showNotification("Verifique la informacion requerida",
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
+        }
+    }
+
+    @Command
+    @NotifyChange({"listaPropietarios", "buscar"})
+    public void actualizar() {
+
+        if (entidad.getIdPredio() != null) {
+            final HashMap<String, Propietario> map = new HashMap<String, Propietario>();
+            map.put("valor", entidad.getIdPredio().getIdPropietario());
+            org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+                    "/nuevo/propietario.zul", null, map);
+            window.doModal();
+        }else {
+            Clients.showNotification("Debe selecionar un propietario",
                     Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
         }
     }

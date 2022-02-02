@@ -190,4 +190,8 @@ public class Propietario implements Serializable {
         return "com.ec.entidad.Propietario[ idPropietario=" + idPropietario + " ]";
     }
 
+    public void setPropNombre() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

@@ -54,16 +54,24 @@
                 </listbox> 
             </div>
             <div class="col-12 col-sm-12 col-md-5 col-lg-5  form-group "  >
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group" align="center" >
+                    
+                    <button label="Editar Propietario" 
+                            class="btn btn-lg btn-success btn-block"
+                           onClick="@command('actualizar')"
+                           tooltiptext="Guardar Registro"/>
+                </div> 
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
                     
                     <label  style="color:red;font-weight:bold" value="PROPIETARIO SELECCIONADO: "/>
-                    <label  style="color:blue;font-weight:bold" value="@bind(vm.entidad.idPredio.idPropietario.propNombre)"/>
-                    <label  style="color:blue;font-weight:bold" value=" "/>                   
-                    <label  style="color:blue;font-weight:bold" value="@bind(vm.entidad.idPredio.idPropietario.propApellido)"/>
-                    
-                    
-                
+                    <label  style="color:blue;font-weight:bold" 
+                              value="@bind(vm.entidad.idPredio.idPropietario.propNombre)"/>
+                    <!--<label  style="color:blue;font-weight:bold" value=" "/>-->                   
+                    <label  style="color:blue;font-weight:bold"
+                              value="@bind(vm.entidad.idPredio.idPropietario.propApellido)"/>
+     
                 </div>
+                
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
                     <label value="(*) " style="color:red;font-weight:bold"/>Tarifa:
                 

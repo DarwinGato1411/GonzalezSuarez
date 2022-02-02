@@ -6,24 +6,11 @@
 <?link rel="icon" type="image/x-icon" href="/iconos/deckxel.ico"?>
 <zk  contentStyle="overflow:auto" with="100%" >
     <hbox self="@define(content)" apply="org.zkoss.bind.BindComposer" 
-          viewModel="@id('vm') @init('com.ec.controlador.AdministrarVenta')" width="100%">
+          viewModel="@id('vm') @init('com.ec.controlador.AdministraReporteClientes')" width="100%">
         <tabbox id="tboxPrincipal"  width="100%">
             <tabs >
-                <tab label="Clientes" sclass="menutabs" /> 
-                <tab label="Productos" sclass="menutabs" /> 
-                <tab label="Propietarios" sclass="menutabs" /> 
-                 <tab label="Medidor" sclass="menutabs" /> 
-                <!--<tab label="Predios" sclass="menutabs" />--> 
-                <tab label="Tarifas" sclass="menutabs" /> 
-               
-                <tab label="Proveedores" sclass="menutabs" /> 
-                <tab label="Conductor" sclass="menutabs" /> 
-                <!--<tab label="Asignar productos a un proveedor" sclass="menutabs" /> -->
-                <!--<tab label="mailing" sclass="menutabs" />--> 
-                <tab label="Usuario" sclass="menutabs" /> 
-                <tab label="Configuraciones" sclass="menutabs" /> 
-                <tab label="Parametrizar Empresa" sclass="menutabs" /> 
-                <tab label="Consultar catastro" sclass="menutabs" /> 
+                <tab label="Reporte de Clientes" sclass="menutabs" /> 
+                
             </tabs>
             <tabpanels >
                 
@@ -34,24 +21,42 @@
                         <custom-attributes org.zkoss.zul.listbox.rod="true"/>
                     
                         <auxhead>
-                            <auxheader colspan="10" >  
-                                <image  src="/iconos/nuevo_pro-24.png"
-                                        class="btn btn btn-secondary btn-sm "
-                                        onClick="@command('nuevoCliente')"
-                                        tooltiptext="Nuevo cliente"/>
-                                <!--                                <div class="col-12 col-sm-12 col-md-1 col-lg-1 " align="start"  >-->
-                                <image  src="/iconos/excel1.png"
-                                        class="btn btn btn-secondary btn-sm "
-                                        onClick="@command('exportListboxToExcel')"
-                                        tooltiptext="Descargar productos"/>
+                            <auxheader colspan="10" >
+                                <div class="row col-12 col-sm-12 col-md-12 col-lg-12 form-group " >
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 " align="start"  >
+                                        <button  src="/iconos/excel1.png"
+                                                 label="Exportar Excel" style="font-weight: bold;"
+                                                 class="btn btn btn-secondary btn-sm "
+                                                 onClick="@command('exportListboxToExcel')"
+                                                 tooltiptext="Exportar Excel"/>
                                 
-<!--                                <image  src="/iconos/pdfrep2.png"
-                                        class="btn btn btn-secondary btn-sm "
-                                        onClick="@command('reporteClientes')"
-                                        tooltiptext="Descargar lista de cientes"/>-->
-                    
-                                <!--</div>-->
-                                <!--<button  label="Nuevo cliente"  onClick="@command('nuevoCliente',valor=each)" sclass="botonLista"  tooltiptext="Nuevo cliente"/>-->
+                                        <button  src="/iconos/pdfrep2.png"
+                                                 
+                                                 label="Exportar Pdf" style="font-weight: bold;"
+                                                 class="btn btn btn-secondary btn-sm "
+                                                 onClick="@command('reporteClientesGeneral')"
+                                                 tooltiptext="Descargar Clientes"/>
+                                    </div> 
+                                    <div class="row  col-12 col-sm-12 col-md-6 col-lg-6 " align="end"  >
+                                        <div class=" col-12 col-sm-12 col-md-9 col-lg-9 "  >
+                                            <label value="Clientes morosos después de " style="font-weight: bold; font-size: 15px"  /> 
+                                        </div>
+                                        <div class="btn-group  col-12 col-sm-12 col-md-3 col-lg-3 "  > 
+                                            <textbox value="@bind(vm.buscarMorosos)"  
+                                                     tooltiptext="# Solicitud"
+                                                     class="form-control form-control-sm"                                         
+                                                     placeholder="Días"
+                                                     onOK="@command('buscarLikeCliMorosos')"
+                                                     onChange="self.setValue(self.getValue().toUpperCase());" />
+                          
+                                                                          
+                                            <button  image="/imagenes/buscar1.png" 
+                                                    onClick="@command('buscarLikeCliMorosos')"  
+                                                    tooltiptext="Buscar Solicitud"
+                                                    class="btn-primary btn-sm "/>
+                                        </div>
+                                    </div>  
+                                </div>
                             </auxheader>
                         </auxhead>
                     
@@ -136,31 +141,7 @@
                     </listbox>
                 
                 </tabpanel>
-                <tabpanel height="100%" hflex="min">
-                    <include src="/venta/admproducto.zul"/>  
-                </tabpanel>
-                <tabpanel height="100%" hflex="min">
-                    <include src="/venta/admpropietario.zul"/>  
-                </tabpanel>
-<!--                <tabpanel height="100%" hflex="min">
-                    <include src="/venta/admpredio.zul"/>  
-                </tabpanel>-->
-              
-                <tabpanel height="100%" hflex="min">
-                    <include src="/venta/admmedidor.zul"/>  
-                </tabpanel>
-                  <tabpanel height="100%" hflex="min">
-                    <include src="/venta/admtarifa.zul"/>  
-                </tabpanel>
-                <tabpanel height="100%" hflex="min">
-                    <include src="/compra/admproveedor.zul"/>  
-                </tabpanel>
-                <tabpanel height="100%" hflex="min">
-                    <include src="/venta/admconductor.zul"/>  
-                </tabpanel>      
-                <!--                <tabpanel height="100%" hflex="min">
-                     <include src="/compra/admproductoproveedor.zul"/>  
-                </tabpanel>-->
+                
                 <tabpanel height="100%" hflex="min">
                     <listbox width="100%" model="@load(vm.listaUsuarios)" nonselectableTags="*"  mold="paging" pageSize="9">
                         <auxhead>
@@ -225,15 +206,7 @@
                        
                     </listbox>
                 </tabpanel>              
-                <tabpanel height="100%" hflex="min">
-                    <include src="/administrar/configuracion.zul"/>  
-                </tabpanel>
-                <tabpanel height="100%" hflex="min">
-                    <include src="/administrar/parametrizar.zul"/>  
-                </tabpanel>
-                <tabpanel height="100%" hflex="min">
-                    <include src="/administrar/catastro.zul"/>  
-                </tabpanel>
+                
             </tabpanels>
             
         </tabbox>

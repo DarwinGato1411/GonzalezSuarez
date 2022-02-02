@@ -1,27 +1,33 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.ec.controlador;
 
 import com.ec.entidad.Cliente;
 import com.ec.entidad.MailMasivo;
 import com.ec.entidad.Usuario;
+import com.ec.servicio.HelperPersistencia;
 import com.ec.servicio.ServicioCliente;
 import com.ec.servicio.ServicioMailMasivo;
 import com.ec.servicio.ServicioUsuario;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.activation.MimetypesFileTypeMap;
+import javax.naming.NamingException;
+import javax.persistence.EntityManager;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperRunManager;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
@@ -42,7 +48,7 @@ import org.zkoss.util.media.AMedia;
  *
  * @author gato
  */
-public class AdministrarVenta {
+public class AdministraReporteClientes {
 
     ServicioUsuario servicioUsuario = new ServicioUsuario();
     private List<Usuario> listaUsuarios = new ArrayList<Usuario>();
@@ -53,13 +59,14 @@ public class AdministrarVenta {
     private String buscarNombre = "";
     private String buscarRazonSocial = "";
     private String buscarCedula = "";
+    private String buscarMorosos = "";
     //mailing
     private List<MailMasivo> listaContactoMail = new ArrayList<MailMasivo>();
     private String buscarEmail = "";
     AMedia fileContent = null;
     Connection con = null;
 
-    public AdministrarVenta() {
+    public AdministraReporteClientes() {
         FindClienteLikeNombre();
         consultarMail();
         cosultarUsuarios("");
@@ -75,6 +82,10 @@ public class AdministrarVenta {
 
     private void FindClienteLikeCedula() {
         listaClientesAll = servicioCliente.FindClienteLikeCedula(buscarCedula);
+    }
+    
+    private void FindClienteLikeMorosos() {
+        listaClientesAll = servicioCliente.FindClienteLikeMorosos(buscarCedula);
     }
 
     //get y set de las variables de la vista
@@ -126,6 +137,15 @@ public class AdministrarVenta {
         this.buscarEmail = buscarEmail;
     }
 
+    public String getBuscarMorosos() {
+        return buscarMorosos;
+    }
+
+    public void setBuscarMorosos(String buscarMorosos) {
+        this.buscarMorosos = buscarMorosos;
+    }
+
+    
     @Command
     @NotifyChange({"listaClientesAll", "buscarRazonSocial"})
     public void buscarClienteRazon() {
@@ -370,51 +390,54 @@ public class AdministrarVenta {
 
     }
     
-//    @Command
-//    public void reporteClientes(@BindingParam("valor") Cliente valor) throws JRException, IOException, NamingException, SQLException {
-//        reporteGeneral(valor.getIdCliente());
-//    }
-//    
-//    public void reporteGeneral(Integer numeroClientes) throws JRException, IOException, NamingException, SQLException {
-//        EntityManager emf = HelperPersistencia.getEMF();
-//        try {
-//
-//            emf.getTransaction().begin();
-//            con = emf.unwrap(Connection.class);
-//            String reportFile = Executions.getCurrent().getDesktop().getWebApp()
-//                    .getRealPath("/reportes");
-//            String reportPath = "";
-//            reportPath = reportFile + File.separator + "reporteclientesgeneral.jasper";
-//
-//            Map<String, Object> parametros = new HashMap<String, Object>();
-//
-//            //  parametros.put("codUsuario", String.valueOf(credentialLog.getAdUsuario().getCodigoUsuario()));
-//            parametros.put("numclientes", numeroClientes);
-//
-//            if (con != null) {
-//                System.out.println("Conexión Realizada Correctamenteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-//            }
-//            FileInputStream is = null;
-//            is = new FileInputStream(reportPath);
-//
-//            byte[] buf = JasperRunManager.runReportToPdf(is, parametros, con);
-//            InputStream mediais = new ByteArrayInputStream(buf);
-//            AMedia amedia = new AMedia("Reporte", "pdf", "application/pdf", mediais);
-//            fileContent = amedia;
-//            final HashMap<String, AMedia> map = new HashMap<String, AMedia>();
-////para pasar al visor
-//            map.put("pdf", fileContent);
-//            org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
-//                    "/venta/contenedorReporte.zul", null, map);
-//            window.doModal();
-//        } catch (Exception e) {
-//            System.out.println("ERROR EL PRESENTAR EL REPORTE "+e.getMessage());
-//        } finally {
-//            if (emf != null) {
-//                emf.getTransaction().commit();
-//            }
-//
-//        }
+    @Command
+    public void reporteClientesGeneral() throws JRException, IOException, NamingException, SQLException {
+        reporteGeneral();
+    }
+    
+    public void reporteGeneral() throws JRException, IOException, NamingException, SQLException {
+        EntityManager emf = HelperPersistencia.getEMF();
+        try {
 
-//    }
+            emf.getTransaction().begin();
+            con = emf.unwrap(Connection.class);
+            String reportFile = Executions.getCurrent().getDesktop().getWebApp()
+                    .getRealPath("/reportes");
+            String reportPath = "";
+            reportPath = reportFile + File.separator + "reporteclientesgeneral.jasper";
+
+            if (con != null) {
+                System.out.println("Conexión Realizada Correctamenteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+            }
+            FileInputStream is = null;
+            is = new FileInputStream(reportPath);
+
+            byte[] buf = JasperRunManager.runReportToPdf(is, null, con);
+            InputStream mediais = new ByteArrayInputStream(buf);
+            AMedia amedia = new AMedia("Reporte", "pdf", "application/pdf", mediais);
+            fileContent = amedia;
+            final HashMap<String, AMedia> map = new HashMap<String, AMedia>();
+//para pasar al visor
+            map.put("pdf", fileContent);
+            org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+                    "/venta/contenedorReporte.zul", null, map);
+            window.doModal();
+        } catch (Exception e) {
+            System.out.println("ERROR EL PRESENTAR EL REPORTE "+e.getMessage());
+        } finally {
+            if (emf != null) {
+                emf.getTransaction().commit();
+            }
+
+        }
+
+    }
+    //buscart num solicitudes
+    @Command
+    @NotifyChange({"listaClientesAll", "buscarMorosos"})
+    public void buscarLikeCliMorosos() {
+        
+        FindClienteLikeMorosos();
+
+    }
 }

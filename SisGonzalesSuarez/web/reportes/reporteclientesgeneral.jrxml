@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteclientesgeneral" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="listaclientesgeneral">
+		<parameter name="id_cliente" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select * from factura fc , cliente cl where fc.id_cliente =cl.id_cliente and fc.id_cliente=$P{id_cliente}]]>
+		</queryString>
+		<field name="id_factura" class="java.lang.Integer"/>
+		<field name="id_estado" class="java.lang.Integer"/>
+		<field name="id_usuario" class="java.lang.Integer"/>
+		<field name="id_cliente" class="java.lang.Integer"/>
+		<field name="fac_numero" class="java.lang.Integer"/>
+		<field name="fac_fecha" class="java.sql.Date"/>
+		<field name="fac_subtotal" class="java.math.BigDecimal"/>
+		<field name="fac_iva" class="java.math.BigDecimal"/>
+		<field name="fac_total" class="java.math.BigDecimal"/>
+		<field name="fac_estado" class="java.lang.String"/>
+		<field name="fac_tipo" class="java.lang.String"/>
+		<field name="fac_abono" class="java.math.BigDecimal"/>
+		<field name="fac_saldo" class="java.math.BigDecimal"/>
+		<field name="fac_descripcion" class="java.lang.String"/>
+		<field name="fac_num_proforma" class="java.lang.Integer"/>
+		<field name="tipodocumento" class="java.lang.String"/>
+		<field name="puntoemision" class="java.lang.String"/>
+		<field name="codestablecimiento" class="java.lang.String"/>
+		<field name="fac_numero_text" class="java.lang.String"/>
+		<field name="fac_tipo_identificador_comprobador" class="java.lang.String"/>
+		<field name="fac_descuento" class="java.math.BigDecimal"/>
+		<field name="fac_cod_ice" class="java.lang.String"/>
+		<field name="fac_cod_iva" class="java.lang.String"/>
+		<field name="fac_total_base_cero" class="java.math.BigDecimal"/>
+		<field name="fac_total_base_gravaba" class="java.math.BigDecimal"/>
+		<field name="codigo_porcentaje" class="java.lang.String"/>
+		<field name="fac_porcentaje_iva" class="java.lang.String"/>
+		<field name="fac_moneda" class="java.lang.String"/>
+		<field name="id_forma_pago" class="java.lang.Integer"/>
+		<field name="fac_plazo" class="java.math.BigDecimal"/>
+		<field name="fac_unidad_tiempo" class="java.lang.String"/>
+		<field name="estadosri" class="java.lang.String"/>
+		<field name="mensajesri" class="java.lang.String"/>
+		<field name="fac_fecha_autorizacion" class="java.sql.Date"/>
+		<field name="fac_clave_acceso" class="java.lang.String"/>
+		<field name="cod_tipoambiente" class="java.lang.Integer"/>
+		<field name="fac_clave_autorizacion" class="java.lang.String"/>
+		<field name="fac_path" class="java.lang.String"/>
+		<field name="tipodocumentomod" class="java.lang.String"/>
+		<field name="fac_fecha_sustento" class="java.sql.Date"/>
+		<field name="fac_saldo_amortizado" class="java.math.BigDecimal"/>
+		<field name="fac_msm_info_sri" class="java.lang.String"/>
+		<field name="fac_num_nota_entrega" class="java.lang.Integer"/>
+		<field name="fac_nota_entrega_process" class="java.lang.String"/>
+		<field name="fac_con_sin_guia" class="java.lang.String"/>
+		<field name="fac_subsidio" class="java.math.BigDecimal"/>
+		<field name="fac_fecha_cobro_plazo" class="java.sql.Date"/>
+		<field name="fac_valor_sin_subsidio" class="java.math.BigDecimal"/>
+		<field name="fac_cliente" class="java.lang.String"/>
+		<field name="fac_direccion" class="java.lang.String"/>
+		<field name="fac_contacto" class="java.lang.String"/>
+		<field name="fac_fotografia_pedido" class="java.lang.String"/>
+		<field name="fac_correo_cliente" class="java.lang.String"/>
+		<field name="id_parroquia" class="java.lang.Integer"/>
+		<field name="fac_observacion" class="java.lang.String"/>
+		<field name="fac_secuencial_unico" class="java.lang.String"/>
+		<field name="fac_num_nota_venta" class="java.lang.Integer"/>
+		<field name="fac_propina" class="java.math.BigDecimal"/>
+		<field name="fac_mesa" class="java.lang.Integer"/>
+		<field name="fac_mesa_historial" class="java.lang.Integer"/>
+		<field name="fac_lec_actual" class="java.math.BigDecimal"/>
+		<field name="fac_lec_anterior" class="java.math.BigDecimal"/>
+		<field name="fac_metros_cubicos" class="java.math.BigDecimal"/>
+		<field name="fac_medidor" class="java.lang.String"/>
+		<field name="fac_lec_mes" class="java.lang.Integer"/>
+		<field name="fac_dir_medidor" class="java.lang.String"/>
+		<field name="cli_cedula" class="java.lang.String"/>
+		<field name="cli_nombre" class="java.lang.String"/>
+		<field name="cli_razon_social" class="java.lang.String"/>
+		<field name="cli_direccion" class="java.lang.String"/>
+		<field name="cli_telefono" class="java.lang.String"/>
+		<field name="cli_movil" class="java.lang.String"/>
+		<field name="cli_correo" class="java.lang.String"/>
+		<field name="clie_fecha_registro" class="java.sql.Date"/>
+		<field name="clie_tipo" class="java.lang.Integer"/>
+		<field name="id_tipo_identificacion" class="java.lang.Integer"/>
+		<field name="cli_nombres" class="java.lang.String"/>
+		<field name="cli_apellidos" class="java.lang.String"/>
+		<field name="ciudad" class="java.lang.String"/>
+		<field name="cli_clave" class="java.lang.String"/>
+		<field name="cli_monto_asignado" class="java.math.BigDecimal"/>
+	</subDataset>
+	<queryString>
+		<![CDATA[select md.med_numero,pr.porp_cedula,pr.prop_nombre,pr.prop_apellido,pr.prop_sector
+from propietario pr, predio pd, medidor md
+where pr.id_propietario=pd.id_propietario and pd.id_predio=md.id_predio
+order by pr.prop_sector]]>
+	</queryString>
+	<field name="med_numero" class="java.lang.String"/>
+	<field name="porp_cedula" class="java.lang.String"/>
+	<field name="prop_nombre" class="java.lang.String"/>
+	<field name="prop_apellido" class="java.lang.String"/>
+	<field name="prop_sector" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="86" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="21"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[JUNTA ADMINISTRADORA DE AGUA POTABLE Y]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="21" width="555" height="21"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ALCANTARILLADO DE GONZALEZ SUAREZ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="42" width="555" height="21"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[LISTA DE CLIENTES]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[med_numero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[porp_cedula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[prop_nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[prop_apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[prop_sector]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<elementGroup>
+				<elementGroup/>
+			</elementGroup>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{med_numero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{porp_cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{prop_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{prop_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{prop_sector}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -203,6 +203,11 @@ public class MenuOpciones extends SelectorComposer<Component> {
     public void btnRetencionesCasillero() {
         Executions.sendRedirect("/compra/listaretencioncasillero.zul");
     }
+    
+    @Listen("onClick = #btnReporteClientes")
+    public void btnReporteClientes() {
+        Executions.sendRedirect("/administrar/reporteclientes.zul");
+    }
 
     @Listen("onClick = #btnFactAutori")
     public void btnFactAutori() {

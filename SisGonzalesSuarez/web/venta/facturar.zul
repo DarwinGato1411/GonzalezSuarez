@@ -81,7 +81,7 @@
                                                                placeholder="# medidor" 
                                                                onChange="self.setValue(self.getValue().toUpperCase());"  />
                                             </listheader>                                                           
-                                            <listheader width="10%"  label="" align="center"/>              
+                                            <listheader width="10%"  label="" align="center"/>             
           
                                         </listhead>  
                                         <template name="model">                                                            
@@ -92,8 +92,16 @@
                                                        class="btn-secondary btn-sm"                                               
                                                        tooltiptext="Historico de pago"/> 
                                                 </listcell>       
-                                                <listcell zclass = "mycss-listcell">
+                                                <listcell zclass = "mycss-listcell" 
+                                                          if="${each.idTarifa.tariSigla != 'TER'}">
                                                     <textbox style="font-size:12px;background:white"
+                                                             class="form-control form-control-sm"  
+                                                             readonly="true"
+                                                             value="@bind(each.idPredio.idPropietario.propNombre)"  />
+                                                </listcell>
+                                                <listcell zclass = "mycss-listcell" style="font-size:12px;background:#E2C1F5"
+                                                          if="${each.idTarifa.tariSigla == 'TER'}">
+                                                    <textbox style="font-size:12px;background:#E2C1F5"
                                                              class="form-control form-control-sm"  
                                                              readonly="true"
                                                              value="@bind(each.idPredio.idPropietario.propNombre)"  />
@@ -119,14 +127,13 @@
                                                     <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
                                                              class="form-control form-control-sm"  
                                                              value="@bind(each.medNumero)"  />
-                                                </listcell>
-                                                
+                                                </listcell>                                      
                                                  <listcell zclass = "mycss-listcell">   
                                                     <image  src="/iconos/Forward.png" 
                                                             onClick="@command('buscarLecturasPendientes',valor=each)" 
                                                             tooltiptext="Asigar producto"/> 
                                                   
-                                                </listcell>
+                                                </listcell> 
                                             </listitem>
                                         </template>
                                     </listbox>   

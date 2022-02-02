@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/DECKXEL/PROYECTOS/Sistema%20Gonzales%20Suarez/GonzalezSuarez/SisGonzalesSuarez/web/venta/facturar.zul</file>
+            <file>file:/D:/DECKXEL/PROYECTOS/Sistema%20Gonzales%20Suarez/GonzalezSuarez/SisGonzalesSuarez/web/nuevo/medidor.zul</file>
+            <file>file:/D:/DECKXEL/PROYECTOS/Sistema%20Gonzales%20Suarez/GonzalezSuarez/SisGonzalesSuarez/src/java/com/ec/entidad/Tarifa.java</file>
+            <file>file:/D:/DECKXEL/PROYECTOS/Sistema%20Gonzales%20Suarez/GonzalezSuarez/SisGonzalesSuarez/src/java/com/ec/controlador/NuevoMedidor.java</file>
+            <file>file:/D:/DECKXEL/PROYECTOS/Sistema%20Gonzales%20Suarez/GonzalezSuarez/SisGonzalesSuarez/src/java/com/ec/controlador/NuevoDetalletarifa.java</file>
+            <file>file:/D:/DECKXEL/PROYECTOS/Sistema%20Gonzales%20Suarez/GonzalezSuarez/SisGonzalesSuarez/src/java/com/ec/controlador/NuevoPropietario.java</file>
+        </group>
     </open-files>
 </project-private>

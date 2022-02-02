@@ -282,4 +282,25 @@ public class ServicioCliente {
         return cliente;
     }
 
+    public List<Cliente> FindClienteLikeMorosos(String buscar) {
+
+        List<Cliente> listaClientes = new ArrayList<Cliente>();
+        try {
+            //Connection connection = em.unwrap(Connection.class);
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createNamedQuery("Cliente.findLikeCliCedula", Cliente.class);
+            query.setParameter("cliCedula", "%" + buscar + "%");
+             //query.setMaxResults(200);
+            listaClientes = (List<Cliente>) query.getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta cliente");
+        } finally {
+            em.close();
+        }
+
+        return listaClientes;
+    }
+    
 }

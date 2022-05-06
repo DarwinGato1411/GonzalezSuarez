@@ -1100,8 +1100,7 @@ public class ListaFacturas {
                 total = total.add(ArchivoUtils.redondearDecimales(item.getFacTotal(), 2));
 
                 HSSFCell c4 = r.createCell(i++);
-                c4.setCellValue(new HSSFRichTextString(""));
-
+                c4.setCellValue(new HSSFRichTextString(item.getEstadosri() != null ? item.getEstadosri() : ""));
                 /*autemta la siguiente fila*/
                 rownum += 1;
 

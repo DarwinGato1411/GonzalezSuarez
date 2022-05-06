@@ -4,11 +4,9 @@
  */
 package com.ec.controlador;
 
-import com.ec.entidad.Factura;
 import com.ec.entidad.Lectura;
 import com.ec.servicio.ServicioGeneral;
 import com.ec.servicio.ServicioLectura;
-import com.ec.untilitario.ArchivoUtils;
 import com.ec.untilitario.ListadoMeses;
 import com.ec.untilitario.ModeloMeses;
 import java.io.File;
@@ -62,8 +60,10 @@ public class AdmLecturas {
     }
 
     private void findMesAndNuMedidor() {
+
+        Date finAno = new Date();
         System.out.println("buscarMes.getMonth() " + buscarMes);
-        listaDatos = servicioLectura.findMesAndNumMedidor(buscar, buscarMes.getNumero());
+        listaDatos = servicioLectura.findMesAndNumMedidor(buscar, buscarMes.getNumero(), finAno.getYear() + 1900);
 
     }
 
@@ -81,26 +81,26 @@ public class AdmLecturas {
             System.out.println("fechaCreacion " + fechaCreacion);
             servicioGeneral.iniciarLecturaMedidor(buscarMes.getNumero(), fechaCreacion);
             findMesAndNuMedidor();
-        } 
+        }
     }
 
     @Command
     @NotifyChange({"listaDatos", "buscarMes"})
     public void iniciarMesSiguiente() {
-        
-        if (Messagebox.show("Al generar una nueva tabla de lecturas, los lecturas de " + buscarMes.getNombre()+ " serán eliminadas" + "\n Desea continuar?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
-            servicioLectura.iniciarProximoMes(buscarMes.getNumero());
+
+        if (Messagebox.show("Al generar una nueva tabla de lecturas, los lecturas de " + buscarMes.getNombre() + " serán eliminadas" + "\n Desea continuar?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
+            servicioLectura.iniciarProximoMes(buscarMes.getNumero(), fechaCreacion);
             findMesAndNuMedidor();
         } else {
             Clients.showNotification("Solicitud cancelada",
                     Clients.NOTIFICATION_TYPE_INFO, null, "middle_center", 1000, true);
         }
     }
-    
+
     @Command
     @NotifyChange({"listaDatos", "buscar"})
     public void cambiarestado(@BindingParam("valor") Lectura valor) {
-        
+
         if (Messagebox.show("Desea cambiar el Estado", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
             if ("S".equals(valor.getLecPagada())) {
                 valor.setLecPagada("N");
@@ -109,7 +109,7 @@ public class AdmLecturas {
                 valor.setLecPagada("S");
                 servicioLectura.modificar(valor);
             }
-        }else {
+        } else {
             Clients.showNotification("Solicitud cancelada",
                     Clients.NOTIFICATION_TYPE_INFO, null, "middle_center", 1000, true);
         }

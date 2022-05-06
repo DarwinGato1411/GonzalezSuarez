@@ -90,8 +90,8 @@
                                 <menuitem label="ATS Ventas" id="btnContabilidad"  /> 
                                 <menuitem label="ATS Compras y Ventas" id="btnContabilidadATS"  /> 
                                 <menuitem label="Retenciones por casillero" id="btnRetencionesCasillero"  />
-                                <menuitem label="Reporte de Propietarios" id="btnReportePropietarios"  />
-                                <menuitem label="Reporte de Morosos" id="btnReporteMorosos"  />
+                                <menuitem label="Propietarios" id="btnReportePropietarios"  />
+                                <menuitem label="Medidores impagos" id="btnReporteMorosos"  />
                             </menupopup>
                         </menu>
                         

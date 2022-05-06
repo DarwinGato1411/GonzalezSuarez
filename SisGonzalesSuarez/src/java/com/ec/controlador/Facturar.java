@@ -785,7 +785,11 @@ public class Facturar extends SelectorComposer<Component> {
             valorCobroBase = detalleTarifa.getDettPrecioBase();
             BigDecimal precioExcedente = detalleTarifa.getDettPorcentajeExcedente();
             valorCobroExce = (adicionales.doubleValue() > 0 ? adicionales.multiply(precioExcedente) : BigDecimal.ZERO);
+            
+           
             basicaMasExcedente = valorCobroBase.add(valorCobroExce);
+            
+             /*ALCANTARILLADO */
             alcantarillado = (basicaMasExcedente.multiply(detalleTarifa.getDettPorcentajeAlcantarillado())).divide(BigDecimal.valueOf(100));
             if (alcantarillado.doubleValue() > 0) {
                 textoAdicional = "  INCLUYE ALCANTARILLADO  ";

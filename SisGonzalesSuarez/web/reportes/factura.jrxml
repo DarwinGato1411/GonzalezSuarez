@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="factura" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.2100000000000002"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="216"/>
+	<property name="ireport.y" value="28"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -473,21 +473,21 @@ where factura.fac_numero=$P{numfactura};]]>
 				<text><![CDATA[Contribuyente Especial Nro]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="189" y="279" width="211" height="20"/>
+				<reportElement x="189" y="279" width="361" height="20"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{cli_nombres}+" "+$F{cli_apellidos}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="400" y="279" width="75" height="20"/>
+				<reportElement x="295" y="303" width="82" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Identificación:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="475" y="279" width="80" height="20"/>
+				<reportElement x="377" y="303" width="173" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{cli_cedula}]]></textFieldExpression>
 			</textField>
@@ -497,13 +497,6 @@ where factura.fac_numero=$P{numfactura};]]>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha de emisión: ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="378" y="303" width="97" height="20"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Guia Remisión:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="11" y="327" width="65" height="20"/>
@@ -541,7 +534,7 @@ where factura.fac_numero=$P{numfactura};]]>
 				</textElement>
 				<text><![CDATA[CONTRIBUYENTE RÉGIMEN MICROEMPRESA]]></text>
 			</staticText>
-			<image>
+			<image onErrorType="Blank">
 				<reportElement x="31" y="4" width="219" height="70"/>
 				<imageExpression class="java.lang.String"><![CDATA[$F{am_dir_img_punto_venta}]]></imageExpression>
 			</image>

@@ -63,6 +63,8 @@ public class Lectura implements Serializable {
     private String lecDescripcion;
     @Column(name = "lec_mes")
     private Integer lecMes;
+      @Column(name = "lec_anio")
+    private Integer lecAnio;
     @JoinColumn(name = "id_medidor", referencedColumnName = "id_medidor")
     @ManyToOne
     private Medidor idMedidor;
@@ -173,6 +175,14 @@ public class Lectura implements Serializable {
 
     public void setLecMes(Integer lecMes) {
         this.lecMes = lecMes;
+    }
+
+    public Integer getLecAnio() {
+        return lecAnio;
+    }
+
+    public void setLecAnio(Integer lecAnio) {
+        this.lecAnio = lecAnio;
     }
 
     public void setDetalleFacturaCollection(Collection<DetalleFactura> detalleFacturaCollection) {

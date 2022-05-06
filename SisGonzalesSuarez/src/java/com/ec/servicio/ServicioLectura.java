@@ -7,6 +7,7 @@ package com.ec.servicio;
 import com.ec.entidad.Lectura;
 import com.ec.entidad.Medidor;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
@@ -118,18 +119,19 @@ public class ServicioLectura {
         return listaLecturas;
     }
 
-    public List<Lectura> findMesAndNumMedidor(String busqueda, Integer mes) {
+    public List<Lectura> findMesAndNumMedidor(String busqueda, Integer mes, Integer anio) {
 
         List<Lectura> listaLecturas = new ArrayList<Lectura>();
         try {
             //Connection connection = em.unwrap(Connection.class);
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT  a FROM Lectura a WHERE (a.idMedidor.idPredio.idPropietario.propNombre LIKE :propNombre OR a.idMedidor.idPredio.idPropietario.propApellido LIKE :propApellido OR a.idMedidor.medNumero LIKE :medNumero) AND a.lecMes=:lecMes ORDER BY a.idMedidor.medNumero ASC");
+            Query query = em.createQuery("SELECT  a FROM Lectura a WHERE (a.idMedidor.idPredio.idPropietario.propNombre LIKE :propNombre OR a.idMedidor.idPredio.idPropietario.propApellido LIKE :propApellido OR a.idMedidor.medNumero LIKE :medNumero) AND a.lecMes=:lecMes AND a.lecAnio=:lecAnio  ORDER BY a.idMedidor.medNumero ASC");
             query.setParameter("medNumero", "%" + busqueda + "%");
             query.setParameter("propNombre", "%" + busqueda + "%");
             query.setParameter("propApellido", "%" + busqueda + "%");
             query.setParameter("lecMes", mes);
+            query.setParameter("lecAnio", anio);
 
             listaLecturas = (List<Lectura>) query.getResultList();
             em.getTransaction().commit();
@@ -142,18 +144,17 @@ public class ServicioLectura {
         return listaLecturas;
     }
 
-    public void iniciarProximoMes(Integer mes) {
+    public void iniciarProximoMes(Integer mes,Date fecha) {
         try {
             em = HelperPersistencia.getEMF();
 
             em.getTransaction().begin();
-//           Query elimina= em.createNativeQuery("delete from model_ruta;");
-//            int i=elimina.executeUpdate();
-//            System.out.println("VALOR BORRA "+i);
             StoredProcedureQuery queryStore = em.createStoredProcedureQuery("iniciar_proximo_mes_par");
             queryStore.registerStoredProcedureParameter("numeromes", Integer.class, ParameterMode.IN);
+            queryStore.registerStoredProcedureParameter("fechaRegistro", Date.class, ParameterMode.IN);
             queryStore.setParameter("numeromes", mes);
-            queryStore.executeUpdate();
+            queryStore.setParameter("fechaRegistro", fecha);
+        int rsult=    queryStore.executeUpdate();
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("error iniciarProximoMes " + e.getMessage());

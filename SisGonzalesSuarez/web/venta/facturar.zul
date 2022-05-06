@@ -119,7 +119,7 @@
                                                              value="@bind(each.idPredio.idPropietario.porpCedula)"  />
                                                 </listcell>
                                                  <listcell zclass = "mycss-listcell">
-                                                    <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
+                                                    <textbox readonly="true" style="font-size:10px;background:#EBF5FB"
                                                              class="form-control form-control-sm"  
                                                              value="@bind(each.medBarrio)"  />
                                                  </listcell>

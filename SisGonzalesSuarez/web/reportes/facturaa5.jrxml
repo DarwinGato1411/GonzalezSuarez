@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="facturaa5" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.1269722013523682"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="446"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -532,7 +532,7 @@ and tipoambiente.am_estado is true;]]>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{am_ruc}]]></textFieldExpression>
 			</textField>
-			<image>
+			<image onErrorType="Blank">
 				<reportElement x="7" y="16" width="136" height="70"/>
 				<imageExpression class="java.lang.String"><![CDATA[$F{am_dir_img_punto_venta}]]></imageExpression>
 			</image>

@@ -92,6 +92,7 @@
                                 <menuitem label="Retenciones por casillero" id="btnRetencionesCasillero"  />
                                 <menuitem label="Propietarios" id="btnReportePropietarios"  />
                                 <menuitem label="Medidores impagos" id="btnReporteMorosos"  />
+                                 <menuitem label="Listado por Barrio" id="btnMedidorBarrio"  />
                             </menupopup>
                         </menu>
                         

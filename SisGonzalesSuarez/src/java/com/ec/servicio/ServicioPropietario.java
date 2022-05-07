@@ -117,4 +117,6 @@ public class ServicioPropietario {
 
         return entidad;
     }
+    
+    
 }

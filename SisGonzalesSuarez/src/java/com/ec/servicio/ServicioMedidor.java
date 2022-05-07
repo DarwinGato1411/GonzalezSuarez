@@ -198,8 +198,7 @@ public class ServicioMedidor {
         return listaMedidors;
     }
 
-    
-     public List<Medidor> findLikeMedNumeroCedula(String valor) {
+    public List<Medidor> findLikeMedNumeroCedula(String valor) {
 
         List<Medidor> listaMedidors = new ArrayList<Medidor>();
         try {
@@ -221,6 +220,7 @@ public class ServicioMedidor {
 
         return listaMedidors;
     }
+
     public Medidor findMedNumero(String valor) {
 
         List<Medidor> listaMedidors = new ArrayList<Medidor>();
@@ -265,5 +265,61 @@ public class ServicioMedidor {
         }
 
         return entidad;
+    }
+
+    public List<Medidor> findLikeBarrios(String valor, String catEdad) {
+
+        List<Medidor> listaMedidors = new ArrayList<Medidor>();
+        try {
+            //Connection connection = em.unwrap(Connection.class);
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            String SQLTOTAL = "";
+            String SQL = "SELECT  a FROM Medidor a WHERE a.medBarrio LIKE :medBarrio ";
+            String TERCERA = "AND a.idPredio.idPropietario.propEdad>=60";
+            String NORMAL = "AND a.idPredio.idPropietario.propEdad<60";
+
+            if (catEdad.equals("")) {
+                SQLTOTAL = SQL;
+            } else {
+                if (catEdad.contains("NORMAL")) {
+                    SQLTOTAL = SQL + NORMAL;
+                } else {
+                    SQLTOTAL = SQL + TERCERA;
+                }
+
+            }
+            Query query = em.createQuery(SQLTOTAL);
+            query.setParameter("medBarrio", "%"+valor+"%");
+
+            listaMedidors = (List<Medidor>) query.getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta medidor findLikeBarrios " + e.getMessage());
+        } finally {
+            em.close();
+        }
+
+        return listaMedidors;
+    }
+
+    public List<Medidor> findTerceraEdad() {
+
+        List<Medidor> listaMedidors = new ArrayList<Medidor>();
+        try {
+            //Connection connection = em.unwrap(Connection.class);
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT  a FROM Medidor a WHERE a.idPredio.idPropietario.propEdad >60");
+//            query.setParameter("medBarrio", valor);
+            listaMedidors = (List<Medidor>) query.getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta medidor findLikeBarrios " + e.getMessage());
+        } finally {
+            em.close();
+        }
+
+        return listaMedidors;
     }
 }

@@ -6,17 +6,17 @@
 <?link rel="icon" type="image/x-icon" href="/iconos/deckxel.ico"?>
 <zk  contentStyle="overflow:auto" with="100%" >
     <hbox self="@define(content)" apply="org.zkoss.bind.BindComposer" 
-          viewModel="@id('vm') @init('com.ec.controlador.AdministraReportePropietarios')" width="100%">
+          viewModel="@id('vm') @init('com.ec.controlador.ReporteMedidorBarrio')" width="100%">
         <tabbox id="tboxPrincipal"  width="100%">
             <tabs >
-                <tab label="Reporte de propietarios por lugar de residencia" sclass="menutabs" /> 
+                <tab label="Listado por barrio / sector" sclass="menutabs" /> 
                 
             </tabs>
             <tabpanels >
                 
                 <tabpanel  height="98%" width="99%"  >                    
                 
-                    <listbox  width="98%" model="@load(vm.listaPropietarios)" 
+                    <listbox  width="98%" model="@load(vm.listaDatos)" 
                               mold="paging" pageSize="50"
                               checkmark="false"  
                               multiple="false"              
@@ -24,8 +24,32 @@
                         <custom-attributes org.zkoss.zul.listbox.rod="true"/>
                         <auxhead>
                             <auxheader colspan="10" >
-                                
-                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 " align="start"  >
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 form-group " align="start"  >
+                                        <label style="color:red;font-weight:bold"/>Barrio:
+                                        <combobox class="" 
+                                                  selectedItem="@bind(vm.buscar)">
+                                            <comboitem label="TODOS" value="" />
+                                            <comboitem label="ATAHUALPA" value="ATAHUALPA" />
+                                            <comboitem label="BELLAVISTA" value="BELLAVISTA" />
+                                            <comboitem label="CENTRO" value="CENTRO" />
+                                            <comboitem label="MARISCAL SUCRE" value="MARISCAL SUCRE" />
+                                            <comboitem label="GUALACATA" value="GUALACATA" />
+                                            <comboitem label="LA COSTA" value="LA COSTA" />
+                                        </combobox> 
+                                        <label style="color:red;font-weight:bold"/>Categoria edad:
+                                        <combobox class="" 
+                                                  selectedItem="@bind(vm.terceraedad)">
+                                            <comboitem label="TODOS" value="" />
+                                            <comboitem label="NORMAL" value="NORMAL" />
+                                            <comboitem label="TERCERA EDAD" value="TERCERA EDAD" />
+                                        </combobox>  
+                                        <button   image="/imagenes/buscar1.png"  
+                                                  onClick="@command('buscarPorbarrio')"  
+                                                  class="btn btn-primary btn-sm  "
+                                                  tooltiptext="Buscar"/>
+                                    </div> 
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 " align="end"  >
                                         <button  src="/iconos/excel1.png"
                                                  label="Exportar Excel" style="font-weight: bold;"
                                                  class="btn btn btn-secondary btn-sm "
@@ -39,26 +63,21 @@
                                                  onClick="@command('reporteProveedoresGeneral')"
                                                  tooltiptext="Descargar Proveedores"/>
                                     </div> 
+                                </div>
                             </auxheader>
                         </auxhead>
-                        <listhead>             
-                            <listheader width="10%"   >
-                                <textbox value="@bind(vm.buscar)" 
-                                         class="form-control form-control-sm"
-                                         tooltiptext="Buscar "                         
-                                         placeholder="Buscar"
-                                         onOK="@command('buscarPropietario')"
-                                         onChange="self.setValue(self.getValue().toUpperCase());" />
+                        <listhead>    
+                            <listheader width="10%"  label="N° Medidor" />         
+                            <listheader width="10%"  label="Cédula" >              
                             </listheader>     
                             <listheader width="20%"  label="Nombres" >              
                             </listheader> 
                             <listheader width="20%"  label="Apellidos" sort="auto(propApellido)" >              
                             </listheader> 
-                            <listheader width="10%"  label="Sector" />
-                       
-                            <listheader width="10%"  label="Fecha" />              
+                            <listheader width="20%"  label="Barrio/Sector" />
+                            
                             <listheader width="5%"  label="Edad" />  
-                            <listheader width="35%"  label="Direccion" />                  
+                            <listheader width="15%"  label="Categoria edad" />                  
           
                         </listhead>  
                         <template name="model">                                                            
@@ -66,53 +85,39 @@
                                 <listcell zclass = "mycss-listcell">
                                     <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
                                              class="form-control form-control-sm"  
-                                             value="@bind(each.porpCedula)"  />
+                                             value="@bind(each.medNumero)"  />
                                 </listcell>
                                 <listcell zclass = "mycss-listcell">
                                     <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
                                              class="form-control form-control-sm"  
-                                             value="@bind(each.propNombre)"  />
+                                             value="@bind(each.idPredio.idPropietario.porpCedula)"  />
                                 </listcell>
                                 <listcell zclass = "mycss-listcell">
                                     <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
                                              class="form-control form-control-sm"  
-                                             value="@bind(each.propApellido)"  />
+                                             value="@bind(each.idPredio.idPropietario.propNombre)"  />
                                 </listcell>
-               
                                 <listcell zclass = "mycss-listcell">
                                     <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
                                              class="form-control form-control-sm"  
-                                             value="@bind(each.propSector)"  />
-                                </listcell>
-               
-                                <listcell zclass = "mycss-listcell">
-                
-                    
-                                    <datebox compact="true" 
-                                             value="@bind(each.porpFechaNac)" 
-                                             buttonVisible="false" lenient="true" 
-                                             tooltiptext="Fecha"
-                                             readonly="true"
-                                             format="medium" width="98%"  />
+                                             value="@bind(each.idPredio.idPropietario.propApellido)"  />
                                 </listcell>
                                 <listcell zclass = "mycss-listcell">
-                
-                    
-                                    <intbox value="@bind(each.propEdad)"                              
-                                            tooltiptext="Fecha"
+                                    <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
+                                             class="form-control form-control-sm"  
+                                             value="@bind(each.medBarrio)"  />
+                                </listcell>
+                                <listcell zclass = "mycss-listcell">
+                                    <intbox value="@bind(each.idPredio.idPropietario.propEdad)"                              
+                                            tooltiptext="Edad"
                                             readonly="true" width="98%"  />
                                 </listcell>
                                 <listcell zclass = "mycss-listcell">
                                     <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
                                              class="form-control form-control-sm"  
-                                             value="@bind(each.propDireccion)"  />
+                                             value="@bind(each.idPredio.idPropietario.terceraEdad)"  />
                                 </listcell>
-<!--                                <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">    
-                                    <image src="/iconos/editar.png"
-                                           class="grow"
-                                           onClick="@command('actualizar',valor=each)" 
-                                           tooltiptext="Modificar producto"/> 
-                                </listcell>-->
+               
                             </listitem>
                         </template>
                     </listbox>

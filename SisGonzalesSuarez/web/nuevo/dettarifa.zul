@@ -42,7 +42,7 @@
                             class="form-control" />
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
-                <label value="(*) " style="color:red;font-weight:bold"/>% Alcantarillado :
+                <label value="(*) " style="color:red;font-weight:bold"/>Alcantarillado :
                 
                 <textbox    constraint="/^[0-9]{1,9}(?:[.][0-9]{1,2})?$/:Ingrese solo numeros"                                                                                                              
                             value="@bind(vm.entidad.dettPorcentajeAlcantarillado)"   
@@ -57,7 +57,7 @@
                             class="form-control" />
             </div>
             
-              <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
+<!--              <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
                 <radiogroup 
                     onCheck="@command('verificarPrecioPorcentaje')" 
                     selectedItem="@bind(vm.precioPorcentaje)"  >                   
@@ -65,10 +65,10 @@
                     <space bar="false"  />   
                     <radio label="Precio" value="FALSE"/>                          
                 </radiogroup>
-            </div>
+            </div>-->
             
              <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group " visible="@bind(vm.entidad.dettValidadesecho)"  >
-                <label value="% Desechos :" style="color:black;"/>
+                <label value=" Desechos :" style="color:black;"/>
                 
                 <textbox    constraint="/^[0-9]{1,9}(?:[.][0-9]{1,2})?$/:Ingrese solo numeros"                                                                                                              
                             value="@bind(vm.entidad.dettPorcentajeDesechos)"   

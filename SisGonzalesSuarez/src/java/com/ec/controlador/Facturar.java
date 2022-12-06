@@ -785,12 +785,11 @@ public class Facturar extends SelectorComposer<Component> {
             valorCobroBase = detalleTarifa.getDettPrecioBase();
             BigDecimal precioExcedente = detalleTarifa.getDettPorcentajeExcedente();
             valorCobroExce = (adicionales.doubleValue() > 0 ? adicionales.multiply(precioExcedente) : BigDecimal.ZERO);
-            
-           
+
             basicaMasExcedente = valorCobroBase.add(valorCobroExce);
-            
-             /*ALCANTARILLADO */
-            alcantarillado = (basicaMasExcedente.multiply(detalleTarifa.getDettPorcentajeAlcantarillado())).divide(BigDecimal.valueOf(100));
+
+            /*ALCANTARILLADO */
+            alcantarillado = detalleTarifa.getDettPorcentajeAlcantarillado();
             if (alcantarillado.doubleValue() > 0) {
                 textoAdicional = "  INCLUYE ALCANTARILLADO  ";
             } else {
@@ -898,7 +897,7 @@ public class Facturar extends SelectorComposer<Component> {
                 if (dias >= 90 && !multaCobrada) {
                     multaCobrada = Boolean.TRUE;
                     BigDecimal cobroTotalMulta = BigDecimal.ZERO;
-                     BigDecimal valorMultaParametriza = parametrizar.getParMultaCorte()!=null? parametrizar.getParMultaCorte():BigDecimal.ZERO;
+                    BigDecimal valorMultaParametriza = parametrizar.getParMultaCorte() != null ? parametrizar.getParMultaCorte() : BigDecimal.ZERO;
                     if (dias >= 360) {
                         cobroTotalMulta = valorMultaParametriza.multiply(BigDecimal.valueOf(6));
                     } else if (dias >= 300) {
@@ -908,11 +907,11 @@ public class Facturar extends SelectorComposer<Component> {
                     } else if (dias >= 180) {
                         cobroTotalMulta = valorMultaParametriza.multiply(BigDecimal.valueOf(3));
                     } else if (dias >= 120) {
-                        System.out.println("parametrizar.getParMultaCorte() "+valorMultaParametriza.multiply(BigDecimal.valueOf(2.0)));
+                        System.out.println("parametrizar.getParMultaCorte() " + valorMultaParametriza.multiply(BigDecimal.valueOf(2.0)));
                         cobroTotalMulta = valorMultaParametriza.multiply(BigDecimal.valueOf(2));
                     } else if (dias >= 90) {
                         cobroTotalMulta = valorMultaParametriza.multiply(BigDecimal.valueOf(1));
-                        
+
                     }
                     /*MULTA POR MAS DE 60 DIAS*/
 

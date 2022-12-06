@@ -213,6 +213,10 @@ public class MenuOpciones extends SelectorComposer<Component> {
     public void btnReporteMorosos() {
         Executions.sendRedirect("/administrar/reportemorosos.zul");
     }
+    @Listen("onClick = #btnMedidorBarrio")
+    public void btnMedidorBarrio() {
+        Executions.sendRedirect("/administrar/medidorbarrio.zul");
+    }
 
     @Listen("onClick = #btnFactAutori")
     public void btnFactAutori() {

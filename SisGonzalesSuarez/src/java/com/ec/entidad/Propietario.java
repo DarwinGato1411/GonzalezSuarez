@@ -62,6 +62,8 @@ public class Propietario implements Serializable {
     private Boolean esAdultoMayor = Boolean.FALSE;
     @OneToMany(mappedBy = "idPropietario")
     private Collection<Predio> predioCollection;
+    @Transient
+    private String terceraEdad;
 
     public Propietario() {
     }
@@ -127,7 +129,7 @@ public class Propietario implements Serializable {
     }
 
     public Integer getPropEdad() {
-        return propEdad;
+        return propEdad == null ? 0 : propEdad;
     }
 
     public void setPropEdad(Integer propEdad) {
@@ -163,6 +165,16 @@ public class Propietario implements Serializable {
 
     public void setEsAdultoMayor(Boolean esAdultoMayor) {
         this.esAdultoMayor = esAdultoMayor;
+    }
+
+    public String getTerceraEdad() {
+        propEdad = propEdad == null ? 0 : propEdad;
+        terceraEdad = propEdad >= 60 ? "TERCERA EDAD" : "NORMAL";
+        return terceraEdad;
+    }
+
+    public void setTerceraEdad(String terceraEdad) {
+        this.terceraEdad = terceraEdad;
     }
 
     @Override

@@ -43,6 +43,7 @@ public class AdmPropietario {
     private List<Propietario> listaPropietarios = new ArrayList<Propietario>();
 
     private String buscar = "";
+   
 
     public AdmPropietario() {
 
@@ -53,6 +54,8 @@ public class AdmPropietario {
     private void findLikeCedulaNombre() {
         listaPropietarios = servicioPropietario.findLikeCedulaNombre(buscar);
     }
+    
+    
 
     @Command
     @NotifyChange({"listaPropietarios", "buscar"})
@@ -96,6 +99,7 @@ public class AdmPropietario {
     public void setBuscar(String buscar) {
         this.buscar = buscar;
     }
+    
 
     /*EXPORTAR EXCEL*/
     @Command
@@ -187,7 +191,7 @@ public class AdmPropietario {
                 c1.setCellValue(new HSSFRichTextString(item.getPropSector()));
 
                 HSSFCell c11 = r.createCell(i++);
-                c11.setCellValue(new HSSFRichTextString(item.getPropEdad()!=null?item.getPropEdad().toString():""));
+                c11.setCellValue(new HSSFRichTextString(item.getPropEdad() != null ? item.getPropEdad().toString() : ""));
 
                 /*autemta la siguiente fila*/
                 rownum += 1;

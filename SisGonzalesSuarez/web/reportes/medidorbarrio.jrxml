@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="medidorbarrio" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.4641000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="barrio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="terceraedad" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select med.med_numero,pro.porp_cedula, pro.prop_nombre, pro.prop_apellido, med.med_barrio,
+pro.prop_edad,case when pro.prop_edad>60 then 'TERCERA EDAD' else 'NORMAL' end tercera
+from medidor med, predio pre, propietario pro where  med.id_predio=pre.id_predio
+and pre.id_propietario=pro.id_propietario and med_barrio like $P{barrio}
+AND case when pro.prop_edad>60 then 'TERCERA EDAD' else 'NORMAL' end like $P{terceraedad}]]>
+	</queryString>
+	<field name="med_numero" class="java.lang.String"/>
+	<field name="porp_cedula" class="java.lang.String"/>
+	<field name="prop_nombre" class="java.lang.String"/>
+	<field name="prop_apellido" class="java.lang.String"/>
+	<field name="med_barrio" class="java.lang.String"/>
+	<field name="prop_edad" class="java.lang.Integer"/>
+	<field name="tercera" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="63" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="21"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[JUNTA ADMINISTRADORA DE AGUA POTABLE Y]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="21" width="555" height="21"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ALCANTARILLADO DE GONZALEZ SUAREZ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="42" width="555" height="21"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[LISTA DE PROPIETARIOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20">
+			<staticText>
+				<reportElement x="0" y="0" width="74" height="20"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[# MEDIDOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="74" y="0" width="69" height="20"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CEDULA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="143" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="243" y="0" width="112" height="20"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[APELLIDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BARRIO MEDIDOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CATEGORIA EDAD]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="74" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{med_numero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="355" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{med_barrio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="74" y="0" width="69" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{porp_cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="143" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{prop_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="243" y="0" width="112" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{prop_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tercera}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

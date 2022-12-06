@@ -24,7 +24,28 @@
                         tooltiptext="Nueva tarifa"/>
                     
             </div>
-                        
+            <div class="col-2 col-sm-2 col-md-1 col-lg-1 form-group " align="start"  >
+                <image  src="/iconos/excel1.png"
+                        class="btn btn btn-secondary btn-sm "
+                        onClick="@command('exportEXCEL')"
+                        tooltiptext="Exportar en excel"/>
+            </div>
+<!--             <div class="col-2 col-sm-2 col-md-10 col-lg-10 form-group " align="start"  >
+                 <label style="color:red;font-weight:bold"/>Buscar por Barrio:
+                    <combobox class="" 
+                              selectedItem="@bind(vm.buscar)">
+                        <comboitem label="ATAHUALPA" value="ATAHUALPA" />
+                        <comboitem label="BELLAVISTA" value="BELLAVISTA" />
+                        <comboitem label="CENTRO" value="CENTRO" />
+                        <comboitem label="MARISCAL SUCRE" value="MARISCAL SUCRE" />
+                        <comboitem label="GUALACATA" value="GUALACATA" />
+                        <comboitem label="LA COSTA" value="LA COSTA" />
+                    </combobox>  
+                    <button   image="/imagenes/buscar1.png"  
+                                          onClick="@command('buscarBarrios')"  
+                                          class="btn btn-primary btn-sm  "
+                                          tooltiptext="Buscar facturas por estado"/>
+             </div>           -->
         </div>
     </div> 
     <listbox  width="100%" model="@load(vm.listaDatos)" 

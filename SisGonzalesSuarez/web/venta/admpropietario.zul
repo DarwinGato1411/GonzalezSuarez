@@ -25,13 +25,12 @@
                     
             </div>
             <div class="col-2 col-sm-2 col-md-1 col-lg-1 form-group " align="start"  >
-                <image  src="/imagenes/excel.png"
+                <image  src="/iconos/excel1.png"
                         class="btn btn btn-secondary btn-sm "
                         onClick="@command('exportEXCEL')"
                         tooltiptext="Exportar en excel"/>
-                    
             </div>
-                        
+
         </div>
     </div> 
     <listbox  width="98%" model="@load(vm.listaPropietarios)" 

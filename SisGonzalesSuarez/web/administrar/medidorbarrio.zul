@@ -29,13 +29,15 @@
                                         <label style="color:red;font-weight:bold"/>Barrio:
                                         <combobox class="" 
                                                   selectedItem="@bind(vm.buscar)">
-                                            <comboitem label="TODOS" value="" />
+                                             <comboitem label="TODOS" value="" />
                                             <comboitem label="ATAHUALPA" value="ATAHUALPA" />
+                                            <comboitem label="BARRIO CENTRAL" value="BARRIO CENTRAL" />
                                             <comboitem label="BELLAVISTA" value="BELLAVISTA" />
-                                            <comboitem label="CENTRO" value="CENTRO" />
-                                            <comboitem label="MARISCAL SUCRE" value="MARISCAL SUCRE" />
                                             <comboitem label="GUALACATA" value="GUALACATA" />
+                                            <comboitem label="INTI HUAYCOPUNGO" value="INTI HUAYCOPUNGO" />
                                             <comboitem label="LA COSTA" value="LA COSTA" />
+                                            <comboitem label="MARISCAL SUCRE" value="MARISCAL SUCRE" />
+                                            <comboitem label="PARQUE CENTRAL" value="PARQUE CENTRAL" />
                                         </combobox> 
                                         <label style="color:red;font-weight:bold"/>Categoria edad:
                                         <combobox class="" 

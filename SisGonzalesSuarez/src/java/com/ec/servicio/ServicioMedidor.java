@@ -79,7 +79,7 @@ public class ServicioMedidor {
             //Connection connection = em.unwrap(Connection.class);
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            String SQL = "SELECT  a FROM Medidor a WHERE CONCAT( a.idPredio.idPropietario.propNombre ,a.idPredio.idPropietario.propApellido) LIKE :propNombre ";
+            String SQL = "SELECT  a FROM Medidor a WHERE a.medActivo=:medActivo AND CONCAT( a.idPredio.idPropietario.propNombre ,a.idPredio.idPropietario.propApellido) LIKE :propNombre ";
             String order = " ORDER BY a.medNumero ASC";
             String[] datos = valor.split(" ");
             System.out.println(" datos.length " + datos.length);
@@ -90,20 +90,20 @@ public class ServicioMedidor {
                     break;
                 case 2:
                     SQL = SQL + " OR  (a.idPredio.idPropietario.propNombre LIKE :param1"
-                            + " AND  a.idPredio.idPropietario.propApellido LIKE :param2 ) ";
+                                + " AND  a.idPredio.idPropietario.propApellido LIKE :param2 ) ";
                     break;
                 case 3:
 
                     SQL = SQL + "OR  (a.idPredio.idPropietario.propNombre LIKE :param1 "
-                            + "AND  a.idPredio.idPropietario.propApellido LIKE :param2  "
-                            + "AND a.idPredio.idPropietario.propApellido LIKE :param3 ) ";
+                                + "AND  a.idPredio.idPropietario.propApellido LIKE :param2  "
+                                + "AND a.idPredio.idPropietario.propApellido LIKE :param3 ) ";
                     break;
                 case 4:
 
                     SQL = SQL + "OR  (a.idPredio.idPropietario.propNombre LIKE :param1 "
-                            + "AND  a.idPredio.idPropietario.propNombre LIKE :param2  "
-                            + "AND  a.idPredio.idPropietario.propApellido LIKE :param3  "
-                            + "AND a.idPredio.idPropietario.propApellido LIKE :param4 ) ";
+                                + "AND  a.idPredio.idPropietario.propNombre LIKE :param2  "
+                                + "AND  a.idPredio.idPropietario.propApellido LIKE :param3  "
+                                + "AND a.idPredio.idPropietario.propApellido LIKE :param4 ) ";
                     break;
                 default:
 
@@ -141,7 +141,7 @@ public class ServicioMedidor {
 
                     break;
             }
-//            query.setParameter("propApellido", "%" + valor + "%");
+            query.setParameter("medActivo", Boolean.TRUE);
 
             listaMedidors = (List<Medidor>) query.getResultList();
             em.getTransaction().commit();
@@ -161,9 +161,10 @@ public class ServicioMedidor {
             //Connection connection = em.unwrap(Connection.class);
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT  a FROM Medidor a WHERE a.medNumero =:medNumero ORDER BY a.medNumero ASC");
+            Query query = em.createQuery("SELECT  a FROM Medidor a WHERE a.medActivo=:medActivo AND a.medNumero =:medNumero ORDER BY a.medNumero ASC");
             query.setParameter("medNumero", valor);
-            //query.setMaxResults(200);
+            query.setParameter("medActivo", Boolean.TRUE);
+//            query.setMaxResults(200);
             listaMedidors = (List<Medidor>) query.getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
@@ -205,9 +206,9 @@ public class ServicioMedidor {
             //Connection connection = em.unwrap(Connection.class);
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT  a FROM Medidor a WHERE a.idPredio.idPropietario.porpCedula LIKE :porpCedula ORDER BY a.medNumero ASC");
+            Query query = em.createQuery("SELECT  a FROM Medidor a WHERE a.medActivo=:medActivo AND a.idPredio.idPropietario.porpCedula LIKE :porpCedula ORDER BY a.medNumero ASC");
             query.setParameter("porpCedula", "%" + valor + "%");
-//            query.setParameter("propNombre", "%" + valor + "%");
+            query.setParameter("medActivo", Boolean.TRUE);
 //            query.setParameter("propApellido", "%" + valor + "%");
             //query.setMaxResults(200);
             listaMedidors = (List<Medidor>) query.getResultList();
@@ -279,7 +280,7 @@ public class ServicioMedidor {
             String TERCERA = "AND a.idPredio.idPropietario.propEdad>=60";
             String NORMAL = "AND a.idPredio.idPropietario.propEdad<60";
 
-            if (catEdad.equals("")) {
+            if (catEdad.equals("TODO")) {
                 SQLTOTAL = SQL;
             } else {
                 if (catEdad.contains("NORMAL")) {
@@ -290,7 +291,7 @@ public class ServicioMedidor {
 
             }
             Query query = em.createQuery(SQLTOTAL);
-            query.setParameter("medBarrio", "%"+valor+"%");
+            query.setParameter("medBarrio", "%" + valor + "%");
 
             listaMedidors = (List<Medidor>) query.getResultList();
             em.getTransaction().commit();

@@ -126,12 +126,13 @@ public class ServicioLectura {
             //Connection connection = em.unwrap(Connection.class);
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT  a FROM Lectura a WHERE (a.idMedidor.idPredio.idPropietario.propNombre LIKE :propNombre OR a.idMedidor.idPredio.idPropietario.propApellido LIKE :propApellido OR a.idMedidor.medNumero LIKE :medNumero) AND a.lecMes=:lecMes AND a.lecAnio=:lecAnio  ORDER BY a.idMedidor.medNumero ASC");
+            Query query = em.createQuery("SELECT  a FROM Lectura a WHERE a.idMedidor.medActivo=:medActivo AND (a.idMedidor.idPredio.idPropietario.propNombre LIKE :propNombre OR a.idMedidor.idPredio.idPropietario.propApellido LIKE :propApellido OR a.idMedidor.medNumero LIKE :medNumero) AND a.lecMes=:lecMes AND a.lecAnio=:lecAnio  ORDER BY a.idMedidor.medNumero ASC");
             query.setParameter("medNumero", "%" + busqueda + "%");
             query.setParameter("propNombre", "%" + busqueda + "%");
             query.setParameter("propApellido", "%" + busqueda + "%");
             query.setParameter("lecMes", mes);
             query.setParameter("lecAnio", anio);
+            query.setParameter("medActivo", Boolean.TRUE);
 
             listaLecturas = (List<Lectura>) query.getResultList();
             em.getTransaction().commit();

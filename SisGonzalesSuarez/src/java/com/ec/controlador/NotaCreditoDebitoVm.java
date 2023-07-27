@@ -726,6 +726,9 @@ public class NotaCreditoDebitoVm {
                 servicioNotaCredito.guardarNotaCreditoDebito(detalleFactura, creditoDebito);
 //                UtilitarioAutorizarSRI autorizarSRI = new UtilitarioAutorizarSRI();
 //                autorizarSRI.enviarNotaCreditoSRI(creditoDebito);
+
+
+                servicioFactura.modificar(factura);
                 reporteGeneral();
                 if (accion.equals("create")) {
                     Executions.sendRedirect("/venta/facturar.zul");

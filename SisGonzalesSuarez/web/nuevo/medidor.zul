@@ -43,7 +43,7 @@
                                          class="form-control form-control-sm"  
                                          value="@bind(each.idPropietario.propNombre)"  />
                             </listcell>
-                             <listcell zclass = "mycss-listcell">
+                            <listcell zclass = "mycss-listcell">
                                 <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
                                          class="form-control form-control-sm"  
                                          value="@bind(each.idPropietario.propApellido)"  />
@@ -58,17 +58,17 @@
                     
                     <button label="Editar Propietario" 
                             class="btn btn-lg btn-success btn-block"
-                           onClick="@command('actualizar')"
-                           tooltiptext="Guardar Registro"/>
+                            onClick="@command('actualizar')"
+                            tooltiptext="Guardar Registro"/>
                 </div> 
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
                     
                     <label  style="color:red;font-weight:bold" value="PROPIETARIO SELECCIONADO: "/>
                     <label  style="color:blue;font-weight:bold" 
-                              value="@bind(vm.entidad.idPredio.idPropietario.propNombre)"/>
+                            value="@bind(vm.entidad.idPredio.idPropietario.propNombre)"/>
                     <!--<label  style="color:blue;font-weight:bold" value=" "/>-->                   
                     <label  style="color:blue;font-weight:bold"
-                              value="@bind(vm.entidad.idPredio.idPropietario.propApellido)"/>
+                            value="@bind(vm.entidad.idPredio.idPropietario.propApellido)"/>
      
                 </div>
                 
@@ -111,7 +111,7 @@
                              format="medium"   />
                 </div>
                 
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
                     <label value="(*) " style="color:red;font-weight:bold"/>Ubicación:
                     <!--                
           <textbox  maxlength="50"                               
@@ -121,11 +121,13 @@
                     <combobox class="" 
                               selectedItem="@bind(vm.entidad.medBarrio)">
                         <comboitem label="ATAHUALPA" value="ATAHUALPA" />
+                        <comboitem label="BARRIO CENTRAL" value="BARRIO CENTRAL" />
                         <comboitem label="BELLAVISTA" value="BELLAVISTA" />
-                        <comboitem label="CENTRO" value="CENTRO" />
-                        <comboitem label="MARISCAL SUCRE" value="MARISCAL SUCRE" />
                         <comboitem label="GUALACATA" value="GUALACATA" />
+                        <comboitem label="INTI HUAYCOPUNGO" value="INTI HUAYCOPUNGO" />
                         <comboitem label="LA COSTA" value="LA COSTA" />
+                        <comboitem label="MARISCAL SUCRE" value="MARISCAL SUCRE" />
+                        <comboitem label="PARQUE CENTRAL" value="PARQUE CENTRAL" />
                     </combobox>   
                 </div>
                      

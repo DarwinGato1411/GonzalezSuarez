@@ -30,22 +30,22 @@
                         onClick="@command('exportEXCEL')"
                         tooltiptext="Exportar en excel"/>
             </div>
-<!--             <div class="col-2 col-sm-2 col-md-10 col-lg-10 form-group " align="start"  >
-                 <label style="color:red;font-weight:bold"/>Buscar por Barrio:
-                    <combobox class="" 
-                              selectedItem="@bind(vm.buscar)">
-                        <comboitem label="ATAHUALPA" value="ATAHUALPA" />
-                        <comboitem label="BELLAVISTA" value="BELLAVISTA" />
-                        <comboitem label="CENTRO" value="CENTRO" />
-                        <comboitem label="MARISCAL SUCRE" value="MARISCAL SUCRE" />
-                        <comboitem label="GUALACATA" value="GUALACATA" />
-                        <comboitem label="LA COSTA" value="LA COSTA" />
-                    </combobox>  
-                    <button   image="/imagenes/buscar1.png"  
-                                          onClick="@command('buscarBarrios')"  
-                                          class="btn btn-primary btn-sm  "
-                                          tooltiptext="Buscar facturas por estado"/>
-             </div>           -->
+            <!--             <div class="col-2 col-sm-2 col-md-10 col-lg-10 form-group " align="start"  >
+                <label style="color:red;font-weight:bold"/>Buscar por Barrio:
+                   <combobox class="" 
+                             selectedItem="@bind(vm.buscar)">
+                       <comboitem label="ATAHUALPA" value="ATAHUALPA" />
+                       <comboitem label="BELLAVISTA" value="BELLAVISTA" />
+                       <comboitem label="CENTRO" value="CENTRO" />
+                       <comboitem label="MARISCAL SUCRE" value="MARISCAL SUCRE" />
+                       <comboitem label="GUALACATA" value="GUALACATA" />
+                       <comboitem label="LA COSTA" value="LA COSTA" />
+                   </combobox>  
+                   <button   image="/imagenes/buscar1.png"  
+                                         onClick="@command('buscarBarrios')"  
+                                         class="btn btn-primary btn-sm  "
+                                         tooltiptext="Buscar facturas por estado"/>
+            </div>           -->
         </div>
     </div> 
     <listbox  width="100%" model="@load(vm.listaDatos)" 
@@ -74,6 +74,7 @@
             </listheader> 
             <listheader width="10%"  label="Fecha Registro" />              
             <listheader width="10%"  label="Tarifa" />              
+            <listheader width="5%"  label="" align="center"/>
             <listheader width="5%"  label="" align="center"/>
         </listhead>  
         <template name="model">                                                            
@@ -116,28 +117,26 @@
                              format="medium" width="98%"  />
                 </listcell>
                 
-                 <listcell zclass = "mycss-listcell">
+                <listcell zclass = "mycss-listcell">
                     <textbox readonly="true" style="font-size:12px;background:#EBF5FB"
                              class="form-control form-control-sm" 
                              value="@bind(each.idTarifa.tariDescripcion)" />
                 </listcell>
-<!--                <listcell zclass = "mycss-listcell">
-                
-                    
-                    <datebox compact="true" 
-                             value="@bind(each.medFechaInstala)" 
-                             buttonVisible="false" lenient="true" 
-                             tooltiptext="Fecha"
-                             readonly="true"
-                             format="medium" width="98%"  />
-                </listcell>-->
-                
+                 <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">    
+                   <checkbox 
+                       
+                        onCheck="@command('activarDesactivar',valor=each)"
+                        label="ACTIVO" 
+                        checked="@bind(each.medActivo)" 
+                    />
+                </listcell>
                 <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">    
                     <image src="/iconos/editar.png"
                            class="grow"
                            onClick="@command('actualizar',valor=each)" 
                            tooltiptext="Modificar"/> 
                 </listcell>
+              
             </listitem>
         </template>
     </listbox>       

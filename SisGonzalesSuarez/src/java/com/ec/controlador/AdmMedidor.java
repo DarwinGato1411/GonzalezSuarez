@@ -232,5 +232,10 @@ public class AdmMedidor {
     public void setBuscar(String buscar) {
         this.buscar = buscar;
     }
-    
+      @Command
+    @NotifyChange({"listaDatos", "buscarNombre"})
+    public void activarDesactivar(@BindingParam("valor") Medidor valor) {      
+                servicioMedidor.modificar(valor);
+    }
+
 }

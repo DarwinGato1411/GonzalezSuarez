@@ -22,7 +22,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -79,8 +78,8 @@ public class Medidor implements Serializable {
     private Tarifa idTarifa;
     @OneToMany(mappedBy = "idMedidor")
     private Collection<Lectura> lecturaCollection;
-    
-    
+    @Column(name = "med_activo")
+    private Boolean medActivo;
 
     public Medidor() {
     }
@@ -185,8 +184,6 @@ public class Medidor implements Serializable {
         this.medDireccion = medDireccion;
     }
 
-   
-
     @XmlTransient
     public Collection<Lectura> getLecturaCollection() {
         return lecturaCollection;
@@ -219,6 +216,14 @@ public class Medidor implements Serializable {
     @Override
     public String toString() {
         return "com.ec.entidad.Medidor[ idMedidor=" + idMedidor + " ]";
+    }
+
+    public Boolean getMedActivo() {
+        return medActivo;
+    }
+
+    public void setMedActivo(Boolean medActivo) {
+        this.medActivo = medActivo;
     }
 
 }

@@ -281,5 +281,28 @@ public class ServicioCliente {
 
         return cliente;
     }
+public Cliente FindClienteDireccion(String buscar) {
 
+        Cliente cliente = new Cliente();
+        try {
+            //Connection connection = em.unwrap(Connection.class);
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT c FROM Cliente c WHERE c.cliDireccion = :cliDireccion");
+            query.setParameter("cliDireccion", buscar);
+            List<Cliente> listaCliente = (List<Cliente>) query.getResultList();
+            if (listaCliente.size() > 0) {
+                cliente = (Cliente) listaCliente.get(0);
+            } else {
+                return null;
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta cliente");
+        } finally {
+            em.close();
+        }
+
+        return cliente;
+    }
 }

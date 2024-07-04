@@ -151,7 +151,7 @@ public class NuevoCliente {
             cliente.setCliRazonSocial(cliente.getCliNombre());
             if (accion.equals("create")) {
 
-                if (servicioCliente.FindClienteForCedula(cliente.getCliCedula()) == null) {
+                if (servicioCliente.FindClienteDireccion(cliente.getCliDireccion()) == null) {
                     cliente.setClietipo(Integer.valueOf(clietipo));
                     cliente.setClieFechaRegistro(fechaReg);
                     cliente.setIdTipoIdentificacion(tipoadentificacion);
@@ -161,7 +161,7 @@ public class NuevoCliente {
                     windowCliente.detach();
                 } else {
 
-                    Clients.showNotification("El número de documento (CI / RUC) ya se encuentra registrado ",
+                    Clients.showNotification("El número de documento (CI / RUC) ya se encuentra registrado, debe ingresar una direccion diferente ",
                             Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
                 }
 
